@@ -1,5 +1,4 @@
 import React from "react";
-// import unmountComponentAtNode from "react-dom";
 import {
     timeFormat,
     select,
@@ -18,7 +17,7 @@ import {dayTaskmanSort, substrateData, oneDayMore} from "../logic/factory";
 import {storeEvent} from "../store";
 
 
-class Taskman extends React.Component {
+export default class ChartTasks extends React.Component {
     constructor(props) {
         super(props)
         this.createBarChart = this.createBarChart.bind(this)
@@ -65,24 +64,24 @@ class Taskman extends React.Component {
         }
 
         let svg = select("#chart")
-        .append("svg")
-        .attr("width", w)
-        .attr("id", 'parentChart')
-        .attr("height", h)
-        .attr("class", "svg");
+            .append("svg")
+            .attr("width", w)
+            .attr("id", 'parentChart')
+            .attr("height", h)
+            .attr("class", "svg");
 
 
         let dateFormat = timeParse("%Y-%m-%d");
 
         let timeScale = scaleTime()
-        .domain([min(taskArray, function (d) {
-            return dateFormat(d.data.start);
-        }),
-            max(taskArray, function (d) {
-                return dateFormat(d.data.end);
-            })])
-        .range([0, w - 150])
-        .nice();
+            .domain([min(taskArray, function (d) {
+                return dateFormat(d.data.start);
+            }),
+                max(taskArray, function (d) {
+                    return dateFormat(d.data.end);
+                })])
+            .range([0, w - 150])
+            .nice();
 
         let categories = taskArray.map(item => item.type);
 
@@ -94,12 +93,12 @@ class Taskman extends React.Component {
         makeGant(taskArray, w, h);
 
         let title = svg.append("text")
-        .text("Задачи на месяц")
-        .attr("x", w / 2)
-        .attr("y", 25)
-        .attr("text-anchor", "middle")
-        .attr("font-size", 18)
-        .attr("fill", "#009FFC");
+            .text("Задачи на месяц")
+            .attr("x", w / 2)
+            .attr("y", 25)
+            .attr("text-anchor", "middle")
+            .attr("font-size", 18)
+            .attr("fill", "#009FFC");
 
 
         function makeGant(tasks, pageWidth, pageHeight) {
@@ -110,9 +109,9 @@ class Taskman extends React.Component {
             let sidePadding = 120;
 
             let colorScale = scaleLinear()
-            .domain([0, categories.length])
-            .range(["#00B9FA", "#F95002"])
-            .interpolate(interpolateHclLong);
+                .domain([0, categories.length])
+                .range(["#00B9FA", "#F95002"])
+                .interpolate(interpolateHclLong);
 
             makeGrid(sidePadding, topPadding, pageWidth, pageHeight);
             drawRects(tasks, gap, topPadding, sidePadding, barHeight, colorScale, pageWidth, pageHeight);
@@ -124,74 +123,74 @@ class Taskman extends React.Component {
         function drawRects(theArray, theGap, theTopPad, theSidePad, theBarHeight, theColorScale, w, h) {
 
             let bigRects = svg.append("g")
-            .selectAll("rect")
-            .data(theArray)
-            .enter()
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", function (d, i) {
-                return i * theGap + theTopPad - 2;
-            })
-            .attr("width", function (d) {
-                return w;
-            })
-            .attr("height", theGap)
-            .attr("stroke", "none")
-            .attr("fill", function (d) {
-                for (let i = 0; i < categories.length; i++) {
-                    if (d.type == categories[i]) {
-                        return rgb(theColorScale(i));
+                .selectAll("rect")
+                .data(theArray)
+                .enter()
+                .append("rect")
+                .attr("x", 0)
+                .attr("y", function (d, i) {
+                    return i * theGap + theTopPad - 2;
+                })
+                .attr("width", function (d) {
+                    return w;
+                })
+                .attr("height", theGap)
+                .attr("stroke", "none")
+                .attr("fill", function (d) {
+                    for (let i = 0; i < categories.length; i++) {
+                        if (d.type == categories[i]) {
+                            return rgb(theColorScale(i));
+                        }
                     }
-                }
-            })
-            .attr("opacity", 0.2);
+                })
+                .attr("opacity", 0.2);
 
 
             let rectangles = svg.append('g')
-            .selectAll("rect")
-            .data(theArray)
-            .enter();
+                .selectAll("rect")
+                .data(theArray)
+                .enter();
 
 
             let innerRects = rectangles.append("rect")
-            .attr("rx", 3)
-            .attr("ry", 3)
-            .attr("class", "rectBlock")
-            .attr("x", function (d) {
-                return timeScale(dateFormat(d.data.start)) + theSidePad;
-            })
-            .attr("y", function (d, i) {
-                return i * theGap + theTopPad;
-            })
-            .attr("width", function (d) {
-                return (timeScale(dateFormat(oneDayMore(d.data.end))) - timeScale(dateFormat(d.data.start)));
-            })
-            .attr("height", theBarHeight)
-            .attr("stroke", "none")
-            .attr("fill", function (d) {
-                for (let i = 0; i < categories.length; i++) {
-                    if (d.type == categories[i]) {
-                        // return rgb(theColorScale(i));
-                        return d.color;
+                .attr("rx", 3)
+                .attr("ry", 3)
+                .attr("class", "rectBlock")
+                .attr("x", function (d) {
+                    return timeScale(dateFormat(d.data.start)) + theSidePad;
+                })
+                .attr("y", function (d, i) {
+                    return i * theGap + theTopPad;
+                })
+                .attr("width", function (d) {
+                    return (timeScale(dateFormat(oneDayMore(d.data.end))) - timeScale(dateFormat(d.data.start)));
+                })
+                .attr("height", theBarHeight)
+                .attr("stroke", "none")
+                .attr("fill", function (d) {
+                    for (let i = 0; i < categories.length; i++) {
+                        if (d.type == categories[i]) {
+                            // return rgb(theColorScale(i));
+                            return d.color;
+                        }
                     }
-                }
-            })
+                })
 
 
             let rectText = rectangles.append("text")
-            .text(function (d) {
-                return d.name;
-            })
-            .attr("x", function (d) {
-                return (timeScale(dateFormat(d.data.end)) - timeScale(dateFormat(d.data.start))) / 2 + timeScale(dateFormat(d.data.start)) + theSidePad;
-            })
-            .attr("y", function (d, i) {
-                return i * theGap + 14 + theTopPad;
-            })
-            .attr("font-size", 11)
-            .attr("text-anchor", "middle")
-            .attr("text-height", theBarHeight)
-            .attr("fill", "#000000");
+                .text(function (d) {
+                    return d.name;
+                })
+                .attr("x", function (d) {
+                    return (timeScale(dateFormat(d.data.end)) - timeScale(dateFormat(d.data.start))) / 2 + timeScale(dateFormat(d.data.start)) + theSidePad;
+                })
+                .attr("y", function (d, i) {
+                    return i * theGap + 14 + theTopPad;
+                })
+                .attr("font-size", 11)
+                .attr("text-anchor", "middle")
+                .attr("text-height", theBarHeight)
+                .attr("fill", "#000000");
 
 
             // rectText.on('mouseover', function (e) {
@@ -260,24 +259,24 @@ class Taskman extends React.Component {
         function makeGrid(theSidePad, theTopPad, w, h) {
 
             let xAxis = axisBottom(timeScale)
-            .ticks(timeDay, 1)
-            .tickSize(-h + theTopPad + 20, 0, 0)
-            .tickFormat(timeFormat('%d'))
+                .ticks(timeDay, 1)
+                .tickSize(-h + theTopPad + 20, 0, 0)
+                .tickFormat(timeFormat('%d'))
 
 
             let grid = svg.append('g')
-            .attr('class', 'grid')
-            .attr('transform', 'translate(' + theSidePad + ', ' + (h - 50) + ')')
-            .call(xAxis);
+                .attr('class', 'grid')
+                .attr('transform', 'translate(' + theSidePad + ', ' + (h - 50) + ')')
+                .call(xAxis);
 
             grid.selectAll("line")
-            .attr("stroke", "#269fd8");
+                .attr("stroke", "#269fd8");
 
             grid.selectAll("text")
-            .style("text-anchor", "middle")
-            .attr("fill", "#000000")
-            .attr("font-size", 10)
-            .attr("dy", "1em");
+                .style("text-anchor", "middle")
+                .attr("fill", "#000000")
+                .attr("font-size", 10)
+                .attr("dy", "1em");
         }
 
         function vertLabels(theGap, theTopPad, theSidePad, theBarHeight, theColorScale) {
@@ -289,34 +288,34 @@ class Taskman extends React.Component {
             }
 
             let axisText = svg.append("g") //without doing this, impossible to put grid lines behind text
-            .selectAll("text")
-            .data(numOccurances)
-            .enter()
-            .append("text")
-            .text(function (d) {
-                return d[0];
-            })
-            .attr("x", 10)
-            .attr("y", function (d, i) {
-                if (i > 0) {
-                    for (let j = 0; j < i; j++) {
-                        prevGap += numOccurances[i - 1][1];
-                        return d[1] * theGap / 2 + prevGap * theGap + theTopPad;
+                .selectAll("text")
+                .data(numOccurances)
+                .enter()
+                .append("text")
+                .text(function (d) {
+                    return d[0];
+                })
+                .attr("x", 10)
+                .attr("y", function (d, i) {
+                    if (i > 0) {
+                        for (let j = 0; j < i; j++) {
+                            prevGap += numOccurances[i - 1][1];
+                            return d[1] * theGap / 2 + prevGap * theGap + theTopPad;
+                        }
+                    } else {
+                        return d[1] * theGap / 2 + theTopPad;
                     }
-                } else {
-                    return d[1] * theGap / 2 + theTopPad;
-                }
-            })
-            .attr("font-size", 11)
-            .attr("text-anchor", "start")
-            .attr("text-height", 14)
-            .attr("fill", function (d) {
-                for (let i = 0; i < categories.length; i++) {
-                    if (d[0] == categories[i]) {
-                        return rgb(theColorScale(i)).darker();
+                })
+                .attr("font-size", 11)
+                .attr("text-anchor", "start")
+                .attr("text-height", 14)
+                .attr("fill", function (d) {
+                    for (let i = 0; i < categories.length; i++) {
+                        if (d[0] == categories[i]) {
+                            return rgb(theColorScale(i)).darker();
+                        }
                     }
-                }
-            });
+                });
 
         }
 
@@ -355,5 +354,3 @@ class Taskman extends React.Component {
         </div>
     }
 }
-
-export default Taskman

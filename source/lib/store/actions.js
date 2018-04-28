@@ -1,5 +1,6 @@
 import C from './constants'
 import {v4} from 'uuid'
+import {orderFormElements} from '../logic/factory'
 
 export const _tasks = (obj) => {
     let {color, name, type, details, dataStart, dataEnd} = obj
@@ -22,12 +23,7 @@ export const _tasks = (obj) => {
 
 export const _modalHidden = (...arr) => dispatch => {
     for (let i = 0; i < arr.length; i++) {
-        if (typeof arr[i] === "object") {
-            dispatch({
-                type: C.MODAL_DISPLAY_ID,
-                value: arr[i].id[0]
-            })
-        } else if (typeof arr[i] === "boolean" && (arr[i] === true || arr[i] === false)) {
+        if (typeof arr[i] === "boolean" && (arr[i] === true || arr[i] === false)) {
             dispatch({
                 type: C.MODAL_OPEN,
                 value: arr[i]
@@ -62,13 +58,13 @@ export const _tempTask = (...arr) => dispatch => {
 export const _modalState = (...arr) => dispatch => {
     for (let i = 0; i < arr.length; i++) {
         switch (arr[i]) {
-            case "checkMark_true" :
+            case true :
                 dispatch({
                     type: C.MODAL_CHECKED,
                     value: true
                 })
                 break
-            case "checkMark_false" :
+            case false :
                 dispatch({
                     type: C.MODAL_CHECKED,
                     value: false
@@ -81,4 +77,12 @@ export const _modalState = (...arr) => dispatch => {
                 })
         }
     }
+}
+
+export const _modalControlPanelState = (state) => dispatch => {
+    orderFormElements.includes(state) ? dispatch({
+        type: C.MODAL_STATE,
+        value: state
+    }) : console.log("state undefined")
+
 }

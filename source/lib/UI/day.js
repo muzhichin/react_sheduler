@@ -1,12 +1,10 @@
+import {createLabelEvent, timeCalculation} from "../logic/factory";
+import {store} from "../store";
 import React from "react";
-import {store} from "../store/index";
-import {createEmptyDay, createLabelEvent, timeCalculation} from "../logic/factory";
 import {_modalHidden} from "../store/actions";
 
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-
-class Day extends React.Component {
+export default class Day extends React.Component {
     constructor(props) {
         super(props)
         const {monthCounter} = this.props
@@ -43,15 +41,3 @@ class Day extends React.Component {
         </div>
     }
 }
-
-
-const EmptyDay = (props) => {
-    let {monthCounter} = props
-    let arr = createEmptyDay(monthCounter)
-    return arr ? arr.map(item => item) : false
-}
-
-
-const Week = () => timeCalculation().dayWeek.map(item => <div key={item}><p>{item}</p></div>)
-
-export {EmptyDay, Week, Day}

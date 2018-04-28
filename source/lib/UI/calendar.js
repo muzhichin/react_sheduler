@@ -1,14 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import Modal from './modal'
-import Taskman from './schedule_tasks'
-import {Day, EmptyDay, Week} from "./calendar_cell";
-import {dayComponentSort, timeCalculation} from "../logic/factory";
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import {store, storeEvent} from "../store/index";
-
-
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ChartTasks from './chart_tasks'
+import Week from "./week";
+import EmptyDay from "./empty_day";
+import Month from "./month";
+import {timeCalculation} from "../logic/factory";
 
 class Calendar extends React.Component {
     constructor(props) {
@@ -47,6 +44,7 @@ class Calendar extends React.Component {
         setTimeout(() => this.setState(prevState => ({
             classAnimations: false
         })), 300)
+        console.log(this.state.isToggleOn)
     }
 
     handleClickBack() {
@@ -77,40 +75,9 @@ class Calendar extends React.Component {
                         < Month monthCounter={isToggleOn}/>
                     </div>
                 </div>
-                <Taskman monthCounter={isToggleOn}/>
+                <ChartTasks monthCounter={isToggleOn}/>
             </div>
         )
-    }
-}
-
-class Month extends React.Component {
-    constructor(props) {
-        super(props)
-        // const {monthCounter} = this.props
-    }
-
-    componentWillMount() {
-        this.unsubscribe = storeEvent.subscribe(
-            () => this.forceUpdate()
-        )
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe()
-    }
-
-
-    render() {
-        let {monthCounter} = this.props
-        let sortDayEvents = dayComponentSort(monthCounter)
-        return sortDayEvents.map((item, k) => {
-            console.log(item)
-            return <Day
-            // idEvent={item.}
-            monthCounter={monthCounter}
-            idEvent={item.id}
-            event={item.name} color={item.color} key={`day-${k}`}
-            data={item.data} keyDay={`day-${k}`} day_number={k}/>})
     }
 }
 
