@@ -1,0 +1,14 @@
+{
+  "nameStore": "redux-store",
+  "tasks": [],
+  "modalHidden": {
+    "event": null,
+    "idEvent" : null,
+    "hidden" : false,
+    "data": "2018-06-04"
+  },
+  "modalState": {
+    "state": "initialFormState",
+    "checkMark": false
+  }
+}

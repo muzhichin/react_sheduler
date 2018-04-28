@@ -1,0 +1,80 @@
+//$bp-larger-than-mobile: 420px;
+//$bp-larger-than-phablet: 768px;
+//$bp-larger-than-tablet: 768px;
+//$bp-larger-than-desktop: 1024px;
+//$bp-larger-than-desktophd: 1280px;
+
+// HYML Variables
+
+$h1:42;
+$h2:24;
+$h3:18;
+$h4:16;
+$h5:14;
+$h6:12;
+$baseFontSize: 16 !global;
+//------------------//
+
+
+
+$size-mobile: 420px; /* We're assuming px sizes are to be used. */
+$size-tablet: 768px;
+$size-desktop: 1024px;
+$size-large: 1280px;
+
+@mixin f-size($font-size) {
+  $rem: $font-size / $baseFontSize;
+  //font-size: $font-size * 1px;
+  font-size: #{$rem}rem;
+}
+
+@mixin mar($mt:0,  $mr: 0,  $mb: 0,  $ml: 0) {
+  $remt: $mt / $baseFontSize;
+  $remr: $mr / $baseFontSize;
+  $remb: $mb / $baseFontSize;
+  $reml: $ml / $baseFontSize;
+  @if $ml != 0 and $mb != 0 and $mt != 0 and $mr != 0 {
+    margin: #{$remt}rem #{$remr}rem #{$remb}rem #{$reml}rem;
+  } @else {
+    @if $mt != 0 {
+      margin-top: #{$remt}rem;
+    }
+    @if $mr != 0 {
+      margin-right: #{$remr}rem;
+    }
+    @if $mb != 0 {
+      margin-bottom: #{$remb}rem;
+    }
+    @if $ml != 0 {
+      margin-left: #{$reml}rem;
+    }
+  }
+}
+
+@mixin pad($pt: 0,$pr: 0,$pb: 0,$pl: 0) {
+  $remt: $pt / $baseFontSize;
+  $remr: $pr / $baseFontSize;
+  $remb: $pb / $baseFontSize;
+  $reml: $pl / $baseFontSize;
+  @if $pl != 0 and $pb != 0 and $pt != 0 and $pr != 0 {
+    padding: #{$remt}rem #{$remr}rem #{$remb}rem #{$reml}rem;
+  } @else {
+    @if $pt != 0 {
+      padding-top: #{$remt}rem;
+    }
+    @if $pr != 0 {
+      padding-right: #{$remr}rem;
+    }
+    @if $pb != 0 {
+      padding-bottom: #{$remb}rem;
+    }
+    @if $pl != 0 {
+      padding-left: #{$reml}rem;
+    }
+  }
+}
+
+@function rem ($px) {
+  $calcRem: $px / $baseFontSize + 0rem;
+  @return $calcRem
+}

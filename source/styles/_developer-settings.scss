@@ -1,0 +1,14 @@
+@import "./breakpoint/breakpoint";
+
+// breakpoint setting
+@include breakpoint-set('default feature', 'max-width');
+
+
+// clearfix
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: ' ';
+    display: table;
+  }
+}

@@ -1,0 +1,389 @@
+@import "modern-normalize.css";
+@import "developer-settings";
+@import "variable";
+@import "project-settings";
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background-image: url("../img/close.svg");
+  background-size: contain;
+  cursor: pointer;
+}
+
+.checked {
+  position: absolute;
+  top: 24px;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background-image: url("../img/checked.svg");
+  background-size: contain;
+  cursor: pointer;
+}
+
+#calendar {
+  font-family: 'Raleway', sans-serif;
+  width: 700px;
+  height: auto;
+  background: #269fd8;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  position: relative;
+  padding: 10px;
+  .caledarHeader span {
+    width: 40px;
+    height: 16px;
+    background-image: url("../img/arrow1.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    //border-radius: 50%;
+    border: none;
+    font-weight: bold;
+    font-size: 6px;
+    //text-align: center;
+    //color: black;
+    outline: none;
+    cursor: pointer;
+
+  }
+  .calendarWrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #c6dcee;
+    div {
+      &:nth-child(13) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(14) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(20) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(21) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(27) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(28) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(34) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(35) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(41) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(42) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(48) p {
+        color: #ff3b00cc
+      }
+      &:nth-child(49) p {
+        color: #ff3b00cc
+      }
+      width: calc(100% / 7);
+      height: 50px;
+      text-align: center;
+    }
+
+    .day {
+      position: relative;
+      &.active .label + p {
+        color: #000000 !important;
+      }
+
+      &.active p {
+        color: #000000;
+        opacity: 0.8;
+      }
+      p {
+        width: 50px;
+        height: 18px;
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        color: white;
+        font-weight: bold;
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover:after {
+          background-color: #91d9d9;
+          border-radius: 50%;
+          opacity: 0.5;
+        }
+        &:after {
+          border-radius: 50%;
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 50px;
+          height: 50px;
+          margin: auto;
+          transition: background-color 0.3s ease-in-out;
+        }
+      }
+    }
+
+    .label {
+      position: absolute;
+      top: 0;
+      color: #81be55;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      //left: 0;
+      border-radius: 50%;
+      & + p {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+.caledarHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  p {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  div {
+    padding-left: 50px;
+    padding-right: 50px;
+    color: white;
+  }
+}
+
+//=====================================animation==============================================
+
+.animation {
+  animation: zoomIn 300ms ease-in forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+//=====================================details==============================================
+
+.details-enter {
+  transform: translateX(-270px);
+}
+
+.details-enter-active {
+  transform: translateX(0px);
+  transition: transform 500ms ease-in
+}
+
+.details-exit {
+  transform: translateX(0px);
+}
+
+.details-exit-active {
+  transform: translateX(-270px);
+  transition: transform 500ms ease-in
+}
+
+//=====================================colors==============================================
+
+.colorSelection-enter {
+  transform: translateX(270px);
+}
+
+.colorSelection-enter-active {
+  transform: translateX(0px);
+  transition: transform 500ms ease-in
+}
+
+.colorSelection-exit {
+  transform: translateX(0px);
+}
+
+.colorSelection-exit-active {
+  transform: translateX(270px);
+  transition: transform 500ms ease-in
+}
+
+//=====================================button==============================================
+
+.button-enter {
+  opacity: 0;
+}
+
+.button-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in !important;
+  transition-delay: 500ms !important;
+}
+
+.button-exit {
+  opacity: 1;
+}
+
+.button-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+#modal {
+  overflow: hidden;
+  width: 300px;
+  height: auto;
+  min-height: 300px;
+  position: absolute;
+  //background: white;
+  //opacity: 0.8;
+  transform: translateX(-100%);
+  transition-duration: 1s;
+  text-align: center;
+  z-index: 100;
+  &.open {
+    transform: translateX(0%);
+  }
+
+  button {
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 9px;
+    // padding: 1.25rem 2.5rem;
+    display: block;
+    background-color: #009ac9;
+    border: 1px solid transparent;
+    color: #ffffff;
+    font-weight: 300;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  button:hover {
+    background-color: inherit;
+    color: #009ac9;
+    border-color: #009ac9;
+  }
+}
+
+.createEvent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 30px;
+  background: white;
+
+}
+
+.button-previos {
+  transform: rotate(180deg);
+
+}
+
+.button-next {
+
+}
+
+#chart {
+  position: relative;
+  z-index: 0;
+}
+
+#tag {
+  z-index: 10;
+}
+
+.wrapperEvent {
+  min-height: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  opacity: 0.8;
+  padding-bottom: 100px;
+
+}
+
+.wrapperForm {
+  width: 90%;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+  textarea {
+    border: none;
+    text-align: center;
+    width: 80%;
+  }
+  form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  input[type="radio"] {
+    display: none;
+    &:checked + label {
+      box-shadow: 0 0 10px #009ac9;
+    }
+  }
+
+  label {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    //border: #009AC9 1px solid;
+    margin: 5px;
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.rectBlock {
+  position: relative;
+  z-index: 100;
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+  }
+}

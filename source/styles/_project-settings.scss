@@ -1,0 +1,49 @@
+@import "variable";
+
+
+button {
+  border-radius: 5px;
+  background: -webkit-linear-gradient(60deg, #3fbeb3 23%, #acb82a 77%);
+  background: -moz-linear-gradient(60deg, #3fbeb3 23%, #acb82a 77%);
+  background: -o-linear-gradient(60deg, #3fbeb3 23%, #acb82a 77%);
+  background: -ms-linear-gradient(60deg, #3fbeb3 23%, #acb82a 77%);
+  background: linear-gradient(30deg, #3fbeb3 23%, #acb82a 77%);
+  width: 50px;
+  height: 48px;
+  color: #ffffff;
+  @include f-size(14);
+  text-transform:uppercase;
+}
+
+html {
+  font-family: "sans-serif";
+  font-size: #{$baseFontSize}px;
+}
+
+h1 {
+  @include f-size($h1);
+}
+
+h2 {
+  @include f-size($h2);
+}
+
+h3 {
+  @include f-size($h3);
+}
+
+h4 {
+  @include f-size($h4);
+}
+
+h5 {
+  @include f-size($h5);
+}
+
+h6 {
+  @include f-size($h6);
+}
+
+p {
+  @include f-size($baseFontSize);
+}

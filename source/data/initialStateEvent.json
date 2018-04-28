@@ -1,0 +1,49 @@
+{
+  "nameStore": "redux-event-store",
+  "tasks": [
+    {
+      "data": {
+        "start": "2018-04-14",
+        "end": "2018-04-15"
+      },
+      "type": "development",
+      "details": "Diatrias sunt classiss de gratis turpis. ",
+      "name": "Cum hydra observare, omnes orgiaes perdere flavum, bassus ususes.",
+      "id": "57b4c232-d39e-46ae-9c5d-fb53d0661b83",
+      "color": "#0BE0D9"
+    },
+    {
+      "data": {
+        "start": "2018-03-14",
+        "end": "2018-04-10"
+      },
+      "type": "Обязательные",
+      "details": "Diatrias sunt classiss de gratis turpis. ",
+      "name": "Silvas unda",
+      "id": "7c000971-bf58-48da-b66c-c1bf62d3694f",
+      "color": "#0BD696"
+    },
+    {
+      "data": {
+        "start": "2018-04-06",
+        "end": "2018-04-07"
+      },
+      "type": "Обязательные",
+      "details": "Diatrias sunt classiss de gratis turpis. ",
+      "name": "Eheu, cobaltum!",
+      "id": "796e5505-321d-40b9-a9c6-7840ae245265",
+      "color": "#0B76E0"
+    },
+    {
+      "data": {
+        "start": "2018-04-19",
+        "end": "2018-04-20"
+      },
+      "type": "Второстепенные",
+      "details": "Cannabis de secundus cobaltum, experientia repressor.",
+      "name": "Castors manducare",
+      "id": "ccfee643-edf6-44ef-a19b-df85f75de45f",
+      "color": "#0B3BD6"
+    }
+  ]
+}
