@@ -2,6 +2,7 @@ import React from 'react';
 import moment from "moment/moment";
 import {store, storeEvent} from "../store/index";
 import {_modalControlPanelState, _modalState} from "../store/actions";
+import {orderFormElements} from "../UI/constants"
 
 export const limitEndingDate = (beginningDate, selectedDate, type) => {
     let year = +beginningDate.split("-")[0],
@@ -71,7 +72,6 @@ export const helperComponent = (nextState, str, state, event) => { // функц
 }
 
 
-export const orderFormElements = ["EVENT_INITIAL", "EVENT_NAME", "EVENT_DESCRIPTION", "EVENT_COLOR", "EVENT_TYPE", "EVENT_END", "CONFIRMATION"]
 
 export const nextState = () => {             //todo переписать
     let indexLength = orderFormElements.length - 1,

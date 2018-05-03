@@ -198,64 +198,67 @@
 
 //=====================================details==============================================
 
-.details-enter {
+.leftEmersion-enter {
   transform: translateX(-270px);
 }
 
-.details-enter-active {
+.leftEmersion-enter-active {
   transform: translateX(0px);
   transition: transform 500ms ease-in
 }
 
-.details-exit {
+.leftEmersion-exit {
   transform: translateX(0px);
 }
 
-.details-exit-active {
+.leftEmersion-exit-active {
   transform: translateX(-270px);
   transition: transform 500ms ease-in
 }
 
 //=====================================colors==============================================
 
-.colorSelection-enter {
+.rightEmersion-enter {
   transform: translateX(270px);
 }
 
-.colorSelection-enter-active {
+.rightEmersion-enter-active {
   transform: translateX(0px);
   transition: transform 500ms ease-in
 }
 
-.colorSelection-exit {
+.rightEmersion-exit {
   transform: translateX(0px);
+  transition: transform 500ms ease-in
 }
 
-.colorSelection-exit-active {
+.rightEmersion-exit-active {
   transform: translateX(270px);
   transition: transform 500ms ease-in
 }
 
-//=====================================button==============================================
+//=====================================dissolution==============================================
 
-.button-enter {
+.dissolution-enter {
   opacity: 0;
 }
 
-.button-enter-active {
+.dissolution-enter-active {
   opacity: 1;
   transition: opacity 500ms ease-in !important;
   transition-delay: 500ms !important;
 }
 
-.button-exit {
+.dissolution-exit {
   opacity: 1;
 }
 
-.button-exit-active {
+.dissolution-exit-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+//========================================================================================
 
 #modal {
   overflow: hidden;
@@ -337,7 +340,7 @@
 
 }
 
-.wrapperForm {
+.modalControlPanel {
   width: 90%;
   height: 100px;
   margin: auto;
@@ -346,33 +349,73 @@
   left: 0;
   right: 0;
   bottom: 0;
-  textarea {
-    border: none;
+
+  .elementAbsolute {
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+  }
+
+  .elementForm {
+    border: #269fd8 solid 1px;
+    border-radius: 10px;
+    padding: 5px;
+    //border: none;
     text-align: center;
     width: 80%;
   }
-  form {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
 
-  input[type="radio"] {
-    display: none;
-    &:checked + label {
-      box-shadow: 0 0 10px #009ac9;
+  //textarea {
+  //  border: #269fd8 solid 1px;
+  //  border-radius: 10px;
+  //  padding: 5px;
+  //  //border: none;
+  //  text-align: center;
+  //  width: 80%;
+  //}
+
+  //input {
+  //  border: #269fd8 solid 1px;
+  //  border-radius: 10px;
+  //  padding: 5px;
+  //}
+  .colorSelection {
+    label {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      //border: #009AC9 1px solid;
+      margin: 5px;
+      display: block;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      display: none;
+      &:checked + label {
+        box-shadow: 0 0 10px #009ac9;
+      }
     }
   }
 
-  label {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    //border: #009AC9 1px solid;
+  select {
+    border: 1px solid #269fd8;
+    border-radius: 10px;
     margin: 5px;
-    display: block;
+    padding: 5px;
     cursor: pointer;
   }
+
+}
+
+.colorSelection {
+  display: flex;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
 }
 
 .rectBlock {

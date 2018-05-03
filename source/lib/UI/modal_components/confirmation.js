@@ -1,6 +1,6 @@
 import {_modalControlPanelState, _tasks} from "../../store/actions";
 import {store, storeEvent} from "../../store";
-import {orderFormElements} from "../../logic/factory";
+import {orderFormElements} from "../constants"
 import React from "react";
 
 export default class Confirmation extends React.Component {
@@ -16,8 +16,8 @@ export default class Confirmation extends React.Component {
     }
 
     render() {
-        return <div>
-            {JSON.stringify(store.getState().tempTask)}
+        return <div className={"elementAbsolute"}>
+            {/*{JSON.stringify(store.getState().tempTask)}*/}
         </div>
     }
 }

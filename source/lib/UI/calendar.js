@@ -44,7 +44,6 @@ class Calendar extends React.Component {
         setTimeout(() => this.setState(prevState => ({
             classAnimations: false
         })), 300)
-        console.log(this.state.isToggleOn)
     }
 
     handleClickBack() {

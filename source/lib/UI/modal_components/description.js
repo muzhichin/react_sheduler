@@ -1,6 +1,7 @@
 import {store} from "../../store";
-import {orderFormElements,helperComponent} from "../../logic/factory";
+import {helperComponent} from "../../logic/factory";
 import React from "react";
+import {orderFormElements} from "../constants"
 import {_tempTask} from "../../store/actions";
 
 export default class Description extends React.Component {
@@ -16,9 +17,9 @@ export default class Description extends React.Component {
     }
 
     componentWillUnmount() {
-        let str = this.refs._title.value
-        let {state} = store.getState().modalState
-        state !== orderFormElements[0] ? store.dispatch(_tempTask({details: str})) : false
+        // let str = this.refs._title.value
+        // let {state} = store.getState().modalState
+        // state !== orderFormElements[0] ? store.dispatch(_tempTask({details: str})) : false
     }
 
 
@@ -28,10 +29,9 @@ export default class Description extends React.Component {
 
     render() {
         return (
-            <textarea key={"textarea"} ref="_title" onKeyDown={this.onTestChange} rows="3"
+            <textarea id={"controlElement"} key={"textarea"} ref="_title" onKeyDown={this.onTestChange} rows="3"
                       autoComplete="off"
-                      id="exampleInputEvents"
-                      placeholder="Enter description" name="descriptionEvents"></textarea>
+                      placeholder="Enter description" className={"elementAbsolute elementForm"} name="descriptionEvents"></textarea>
         )
     }
 }

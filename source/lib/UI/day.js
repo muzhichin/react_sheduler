@@ -15,7 +15,7 @@ export default class Day extends React.Component {
     componentDidUpdate() {
         let {event, data} = this.props
         let dataOpenModal = store.getState().modalHidden.data
-        dataOpenModal === data ? store.dispatch(_modalHidden(event)) : false
+        dataOpenModal === data ? store.dispatch(_modalHidden(event)) : false //todo
     }
 
     componentWillReceiveProps(nextProps) {

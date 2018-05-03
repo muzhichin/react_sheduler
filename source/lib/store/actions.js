@@ -1,21 +1,21 @@
 import C from './constants'
 import {v4} from 'uuid'
-import {orderFormElements} from '../logic/factory'
+import {orderFormElements} from "../UI/constants"
 
 export const _tasks = (obj) => {
-    let {color, name, type, details, dataStart, dataEnd} = obj
+    let {EVENT_START, EVENT_NAME, EVENT_DESCRIPTION, EVENT_COLOR, EVENT_TYPE, EVENT_END} = obj
     return ({
         type: C.SET_TASK,
         value: {
             data: {
-                start: dataStart,
-                end: dataEnd
+                start: EVENT_START,
+                end: EVENT_END
             },
-            type: type,
-            details: details,
-            name: name,
+            type: EVENT_TYPE,
+            details: EVENT_DESCRIPTION,
+            name: EVENT_NAME,
             id: v4(),
-            color: color
+            color: EVENT_COLOR
         }
     })
 }
@@ -47,7 +47,7 @@ export const _tempTask = (...arr) => dispatch => {
     const arrState = ["dataStart", "dataEnd", "type", "details", "name", "color"]
     arr.filter(i => {
         let str = Object.getOwnPropertyNames(i)[0]
-        arrState.includes(str) ? dispatch({
+        orderFormElements.includes(str) ? dispatch({
             type: C.TEMP_TASK,
             value: i
         }) : console.log("no str")
@@ -71,10 +71,11 @@ export const _modalState = (...arr) => dispatch => {
                 })
                 break
             default :
-                dispatch({
-                    type: C.MODAL_STATE,
-                    value: arr[i]
-                })
+                // dispatch({
+                //     type: C.MODAL_STATE,
+                //     value: arr[i]
+                // })
+                return 0
         }
     }
 }

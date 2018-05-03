@@ -1,33 +1,34 @@
 import {store} from "../../store";
 import {_modalState, _tempTask} from "../../store/actions";
-import {orderFormElements} from "../../logic/factory";
 import React from "react";
+import {orderFormElements} from "../constants"
 
 export default class Color extends React.Component {
 
     constructor(props) {
         super(props)
         this.setSelectedInputRef = this.setSelectedInputRef.bind(this)
-        this.changeInput = null
+        this.state = {
+            firstChecked : true
+        }
     }
 
 
     setSelectedInputRef = element => {
-        this.changeInput ? false : store.dispatch(_modalState(true))
-        this.changeInput = element.target.value;
+        element.target.id !== "color-1" ? this.setState(()=> ({firstChecked : false})) : this.setState(()=> ({firstChecked : true}))
+        element.target.parentNode.dataset.value = element.target.value
     }
 
-    componentWillUnmount() {
-        let state = store.getState().modalState.state
-        state !== orderFormElements[0] ? store.dispatch(_tempTask({color: this.changeInput})) : false
-
+    componentDidMount() {
+        store.dispatch(_modalState(true))
     }
 
 
     render() {
+        let checked =  this.state.firstChecked
         return (
-            <div className={"colorSelection"}>
-                <input onChange={this.setSelectedInputRef} id={"color-1"} name="color" type="radio"
+            <div id={"controlElement"} data-value="#0BE0D9" className={"colorSelection elementAbsolute"}>
+                <input checked={checked} onChange={this.setSelectedInputRef} id={"color-1"} name="color" type="radio"
                        value="#0BE0D9"/>
                 <label style={{backgroundColor: "#0BE0D9"}} htmlFor="color-1"></label>
 

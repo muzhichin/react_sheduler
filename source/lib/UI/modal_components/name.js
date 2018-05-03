@@ -1,7 +1,8 @@
 import {store} from "../../store";
-import {orderFormElements, helperComponent} from "../../logic/factory";
+import {helperComponent} from "../../logic/factory";
 import React from "react";
 import {_tempTask} from "../../store/actions";
+import {orderFormElements} from "../constants"
 
 export default class Name extends React.Component {
 
@@ -11,9 +12,9 @@ export default class Name extends React.Component {
     }
 
     componentWillUnmount() {
-        let str = this.refs._title.value
-        let {state} = store.getState().modalState
-        state !== orderFormElements[0] ? store.dispatch(_tempTask({name: str})) : false
+        // let str = this.refs._title.value
+        // let {state} = store.getState().modalState
+        // state !== orderFormElements[0] ? store.dispatch(_tempTask({name: str})) : false
     }
 
     onTestChange = (event) => {
@@ -22,6 +23,6 @@ export default class Name extends React.Component {
 
 
     render() {
-        return <input onKeyDown={this.onTestChange} ref={"_title"}/>
+        return <input id={"controlElement"} className={"elementAbsolute elementForm"} onKeyDown={this.onTestChange} ref={"_title"}/>
     }
 }
