@@ -44,7 +44,7 @@ export const _modalHidden = (...arr) => dispatch => {
 }
 
 export const _tempTask = (...arr) => dispatch => {
-    const arrState = ["dataStart", "dataEnd", "type", "details", "name", "color"]
+
     arr.filter(i => {
         let str = Object.getOwnPropertyNames(i)[0]
         orderFormElements.includes(str) ? dispatch({
@@ -71,10 +71,6 @@ export const _modalState = (...arr) => dispatch => {
                 })
                 break
             default :
-                // dispatch({
-                //     type: C.MODAL_STATE,
-                //     value: arr[i]
-                // })
                 return 0
         }
     }

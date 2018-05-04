@@ -11,14 +11,10 @@ export default class Type extends React.Component {
         this.onTestChange = this.onTestChange.bind(this)
     }
 
-    // componentWillUnmount() {
-    //     let str = this.refs._title.value
-    //     let state = store.getState().modalState.state
-    //     state !== orderFormElements[0] ? store.dispatch(_tempTask({type: str})) : false
-    // }
-
     onTestChange = (event) => {
-        helperComponent(this.props.nextState, this.refs._title.value, store.getState().modalState.checkMark, event)
+        let value = this.refs._title.value,
+            state = store.getState().modalState.checkMark
+        helperComponent(value, state, event)
     }
 
 

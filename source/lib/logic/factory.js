@@ -1,8 +1,26 @@
 import React from 'react';
 import moment from "moment/moment";
 import {store, storeEvent} from "../store/index";
-import {_modalControlPanelState, _modalState} from "../store/actions";
+import {_modalControlPanelState, _modalState, _tempTask} from "../store/actions";
 import {orderFormElements} from "../UI/constants"
+
+
+export const dataControl = () => {
+    let controlElement = document.getElementById("controlElement"),
+        state = store.getState().modalState.state
+
+    if (controlElement) {
+        controlElement.tagName === "INPUT" || controlElement.tagName === "TEXTAREA" ? store.dispatch(_tempTask(
+            JSON.parse(`{"${state}" : "${controlElement.value}"}`)
+        )) : false
+
+        controlElement.tagName === "DIV" ? store.dispatch(_tempTask(
+            JSON.parse(`{"${state}" : "${controlElement.dataset.value}"}`)
+        )) : false
+    }
+    store.dispatch(_modalState(false))
+    store.dispatch(_modalControlPanelState(nextState()))
+}
 
 export const limitEndingDate = (beginningDate, selectedDate, type) => {
     let year = +beginningDate.split("-")[0],
@@ -53,24 +71,19 @@ export const limitEndingDate = (beginningDate, selectedDate, type) => {
         default :
             return [null, null, null]
     }
-
-
-    // return <option>{year}</option>
 }
 
-export const helperComponent = (nextState, str, state, event) => { // функция помощник, которая предотвращает дублирование кода
-    if (str.length > 1 && state !== true) {                 // todo переписать nextState в глобалную функцию
+export const helperComponent = (str, state, event) => { // функция помощник, которая предотвращает дублирование кода
+    if (str.length > 1 && state !== true) {
         store.dispatch(_modalState(true))
     } else if (str.length < 2 && state !== false) {
         store.dispatch(_modalState(false))
     }
     if (event.which === 13 || event.keyCode === 13) {
         // event.preventDefault();
-        store.dispatch(_modalState(false))
-        store.dispatch(_modalControlPanelState(nextState()))
+        dataControl()
     }
 }
-
 
 
 export const nextState = () => {             //todo переписать
@@ -80,15 +93,15 @@ export const nextState = () => {             //todo переписать
     return orderFormElements[i]
 }
 
+
 export function timeCalculation(monthCounter = 0) {
 
     let data = moment().add(monthCounter, 'month'),
         set = (id) => data.set('date', id).format('YYYY-MM-DD'),
         now = data.format('YYYY-MM-DD'),
         lastDay = data.endOf('month').format('DD'),
-        firstWeek = moment().add(monthCounter, 'month').weekday() ? moment().add(monthCounter, 'month').weekday() - 1 : 6, //0 - 6
+        firstWeek = data.date(1).isoWeekday() - 1, //1 - 7
         dayWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
     return {data, dayWeek, now, firstWeek, lastDay, set}
 
 }

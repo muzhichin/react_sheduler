@@ -11,20 +11,11 @@ export default class Description extends React.Component {
         this.onTestChange = this.onTestChange.bind(this)
     }
 
-    componentDidMount() {
-        // this.props.createEvent("hello", "friends")
-        // console.log(store.getState().modalState.state)
-    }
-
-    componentWillUnmount() {
-        // let str = this.refs._title.value
-        // let {state} = store.getState().modalState
-        // state !== orderFormElements[0] ? store.dispatch(_tempTask({details: str})) : false
-    }
-
 
     onTestChange = (event) => {
-        helperComponent(this.props.nextState, this.refs._title.value, store.getState().modalState.checkMark, event)
+        let value = this.refs._title.value,
+            state = store.getState().modalState.checkMark
+        helperComponent(value, state, event)
     }
 
     render() {

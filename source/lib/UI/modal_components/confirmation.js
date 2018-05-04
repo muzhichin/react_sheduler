@@ -18,6 +18,7 @@ export default class Confirmation extends React.Component {
     render() {
         return <div className={"elementAbsolute"}>
             {/*{JSON.stringify(store.getState().tempTask)}*/}
+            Done!
         </div>
     }
 }
