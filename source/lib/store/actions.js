@@ -25,17 +25,12 @@ export const _modalHidden = (...arr) => dispatch => {
     for (let i = 0; i < arr.length; i++) {
         if (typeof arr[i] === "boolean" && (arr[i] === true || arr[i] === false)) {
             dispatch({
-                type: C.MODAL_OPEN,
+                type: C.MODAL_HIDDEN,
                 value: arr[i]
             })
-        } else if (Array.isArray(arr[i]) || arr[i] === null) {
+        } else if (arr[i] !== null && typeof arr[i] === "object") {
             dispatch({
-                type: C.EVENT_DISPLAY,
-                value: arr[i]
-            })
-        } else if (typeof arr[i] === "string") {
-            dispatch({
-                type: C.MODAL_SET_DATA,
+                type: C.MODAL_LIST,
                 value: arr[i]
             })
         }
@@ -55,18 +50,18 @@ export const _tempTask = (...arr) => dispatch => {
 }
 
 
-export const _modalState = (...arr) => dispatch => {
+export const _panelButton = (...arr) => dispatch => {
     for (let i = 0; i < arr.length; i++) {
         switch (arr[i]) {
             case true :
                 dispatch({
-                    type: C.MODAL_CHECKED,
+                    type: C.PANEL_BUTTON,
                     value: true
                 })
                 break
             case false :
                 dispatch({
-                    type: C.MODAL_CHECKED,
+                    type: C.PANEL_BUTTON,
                     value: false
                 })
                 break
@@ -76,9 +71,9 @@ export const _modalState = (...arr) => dispatch => {
     }
 }
 
-export const _modalControlPanelState = (state) => dispatch => {
+export const _panelState = (state) => dispatch => {
     orderFormElements.includes(state) ? dispatch({
-        type: C.MODAL_STATE,
+        type: C.PANEL_STATE,
         value: state
     }) : console.log("state undefined")
 

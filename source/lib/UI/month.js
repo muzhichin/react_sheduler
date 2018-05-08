@@ -23,14 +23,15 @@ export default class Month extends React.Component {
     render() {
         let {monthCounter} = this.props,
             sortDayEvents = dayComponentSort(monthCounter)
-        return sortDayEvents.map((item, k) => {
-            // console.log(item)
-            return <Day
-                // idEvent={item.}
+        return sortDayEvents.map((item, k) => <Day
                 monthCounter={monthCounter}
-                idEvent={item.id}
-                event={item.name} color={item.color} key={`day-${k}`}
-                data={item.data} keyDay={`day-${k}`} day_number={k}/>
-        })
+                key={`day-${k}`}
+                list={item} keyDay={`day-${k}`} day_number={k}/>
+            //
+            // monthCounter={monthCounter}
+            // idEvent={item.id}
+            // event={item.name} color={item.color} key={`day-${k}`}
+            // data={item.data} keyDay={`day-${k}`} day_number={k}/>
+        )
     }
 }

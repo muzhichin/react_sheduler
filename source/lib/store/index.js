@@ -1,5 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {modalHidden, modalState, tasks, tempTask, nameStore} from './reducers'
+import {modalHidden, panelState, tasks, tempTask, nameStore} from './reducers'
 import stateData from '../../data/initialState'
 import stateDataEvent from '../../data/initialStateEvent'
 import thunk from 'redux-thunk'
@@ -24,7 +24,7 @@ const saver = store => next => action => {
 
 const storeFactory = (initialState = stateData, name = 'redux-store') =>
     applyMiddleware(thunk, logger, saver)(createStore)(
-        combineReducers({tasks, nameStore, modalHidden, modalState, tempTask}),
+        combineReducers({tasks, nameStore, modalHidden, panelState, tempTask}),
         (localStorage[name]) ?
             JSON.parse(localStorage[name]) :
             initialState

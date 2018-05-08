@@ -1,13 +1,13 @@
 import React from 'react';
 import moment from "moment/moment";
 import {store, storeEvent} from "../store/index";
-import {_modalControlPanelState, _modalState, _tempTask} from "../store/actions";
+import {_panelState, _panelButton, _tempTask} from "../store/actions";
 import {orderFormElements} from "../UI/constants"
 
 
 export const dataControl = () => {
     let controlElement = document.getElementById("controlElement"),
-        state = store.getState().modalState.state
+        state = store.getState().panelState.state
 
     if (controlElement) {
         controlElement.tagName === "INPUT" || controlElement.tagName === "TEXTAREA" ? store.dispatch(_tempTask(
@@ -18,11 +18,11 @@ export const dataControl = () => {
             JSON.parse(`{"${state}" : "${controlElement.dataset.value}"}`)
         )) : false
     }
-    store.dispatch(_modalState(false))
-    store.dispatch(_modalControlPanelState(nextState()))
+    store.dispatch(_panelButton(false))
+    store.dispatch(_panelState(nextState()))
 }
 
-export const limitEndingDate = (beginningDate, selectedDate, type) => {
+export const validationEndingDate = (beginningDate, selectedDate, type) => {
     let year = +beginningDate.split("-")[0],
         arrYear = [],
         arrMonth = [],
@@ -75,9 +75,9 @@ export const limitEndingDate = (beginningDate, selectedDate, type) => {
 
 export const helperComponent = (str, state, event) => { // функция помощник, которая предотвращает дублирование кода
     if (str.length > 1 && state !== true) {
-        store.dispatch(_modalState(true))
+        store.dispatch(_panelButton(true))
     } else if (str.length < 2 && state !== false) {
-        store.dispatch(_modalState(false))
+        store.dispatch(_panelButton(false))
     }
     if (event.which === 13 || event.keyCode === 13) {
         // event.preventDefault();
@@ -88,7 +88,7 @@ export const helperComponent = (str, state, event) => { // функция пом
 
 export const nextState = () => {             //todo переписать
     let indexLength = orderFormElements.length - 1,
-        state = store.getState().modalState.state || orderFormElements[0],
+        state = store.getState().panelState.state || orderFormElements[0],
         i = orderFormElements.indexOf(state) + 1 > indexLength ? 0 : orderFormElements.indexOf(state) + 1
     return orderFormElements[i]
 }

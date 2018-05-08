@@ -2,12 +2,12 @@
   "nameStore": "redux-store",
   "tasks": [],
   "modalHidden": {
-    "event": null,
-    "idEvent" : null,
+    "name": null,
+    "id" : null,
     "hidden" : false,
     "data": null
   },
-  "modalState": {
+  "panelState": {
     "checkMark": false
   }
 }

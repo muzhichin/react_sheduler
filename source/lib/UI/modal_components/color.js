@@ -1,5 +1,5 @@
 import {store} from "../../store";
-import {_modalState, _tempTask} from "../../store/actions";
+import {_panelButton, _tempTask} from "../../store/actions";
 import React from "react";
 import {orderFormElements} from "../constants"
 
@@ -20,7 +20,7 @@ export default class Color extends React.Component {
     }
 
     componentDidMount() {
-        store.dispatch(_modalState(true))
+        store.dispatch(_panelButton(true))
     }
 
 

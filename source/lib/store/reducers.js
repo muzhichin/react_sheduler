@@ -20,24 +20,20 @@ export const nameStore = (state = {}, action) => {
 
 export const modalHidden = (state = {}, action) => {
     switch (action.type) {
-        case C.MODAL_OPEN :
+        case C.MODAL_HIDDEN :
             return {...state, hidden: action.value}
-        case C.MODAL_DISPLAY_ID :
-            return {...state, idEvent: action.value}
-        case C.EVENT_DISPLAY :
-            return {...state, event: action.value}
-        case C.MODAL_SET_DATA :
-            return {...state, data: action.value}
+        case C.MODAL_LIST :
+            return {...state, ...action.value}
         default:
             return state
     }
 }
 
-export const modalState = (state = {}, action) => {
+export const panelState = (state = {}, action) => {
     switch (action.type) {
-        case C.MODAL_STATE :
+        case C.PANEL_STATE :
             return {...state, state: action.value}
-        case C.MODAL_CHECKED :
+        case C.PANEL_BUTTON :
             return {...state, checkMark: action.value}
         default:
             return state

@@ -17,7 +17,7 @@ export default class ModalControlPanel extends React.Component {
     }
 
     render() {
-        let {state} = store.getState().modalState
+        let {state} = store.getState().panelState
         let {nextState, data} = this.props
         return <TransitionGroup component={null}>
             {

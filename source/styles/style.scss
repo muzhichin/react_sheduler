@@ -7,8 +7,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 16px;
-  height: 16px;
+  width: rem(16);
+  height: rem(16);
   background-image: url("../img/close.svg");
   background-size: contain;
   cursor: pointer;
@@ -16,10 +16,10 @@
 
 .checked {
   position: absolute;
-  top: 24px;
+  top: rem(24);
   right: 0;
-  width: 16px;
-  height: 16px;
+  width: rem(16);
+  height: rem(16);
   background-image: url("../img/checked.svg");
   background-size: contain;
   cursor: pointer;
@@ -27,17 +27,17 @@
 
 #calendar {
   font-family: 'Raleway', sans-serif;
-  width: 700px;
+  width: rem(700);
   height: auto;
   background: #269fd8;
   display: flex;
   flex-wrap: wrap;
   align-content: start;
   position: relative;
-  padding: 10px;
+  padding: rem(10);
   .caledarHeader span {
-    width: 40px;
-    height: 16px;
+    width: rem(40);
+    height: rem(16);
     background-image: url("../img/arrow1.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -45,7 +45,7 @@
     //border-radius: 50%;
     border: none;
     font-weight: bold;
-    font-size: 6px;
+    font-size: rem(6);
     //text-align: center;
     //color: black;
     outline: none;
@@ -56,7 +56,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    border-top: 1px solid #c6dcee;
+    border-top: rem(1) solid #c6dcee;
     div {
       &:nth-child(13) p {
         color: #ff3b00cc
@@ -95,7 +95,7 @@
         color: #ff3b00cc
       }
       width: calc(100% / 7);
-      height: 50px;
+      height: rem(50);
       text-align: center;
     }
 
@@ -110,8 +110,8 @@
         opacity: 0.8;
       }
       p {
-        width: 50px;
-        height: 18px;
+        width: rem(50);
+        height: rem(18);
         display: block;
         position: absolute;
         left: 0;
@@ -137,8 +137,8 @@
           bottom: 0;
           left: 0;
           right: 0;
-          width: 50px;
-          height: 50px;
+          width: rem(50);
+          height: rem(50);
           margin: auto;
           transition: background-color 0.3s ease-in-out;
         }
@@ -167,14 +167,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 70px;
+  height: rem(70);
   p {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: rem(20);
+    margin-right: rem(20);
   }
   div {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: rem(50);
+    padding-right: rem(50);
     color: white;
   }
 }
@@ -199,41 +199,41 @@
 //=====================================details==============================================
 
 .leftEmersion-enter {
-  transform: translateX(-270px);
+  transform: translateX(rem(-270));
 }
 
 .leftEmersion-enter-active {
-  transform: translateX(0px);
+  transform: translateX(0);
   transition: transform 500ms ease-in
 }
 
 .leftEmersion-exit {
-  transform: translateX(0px);
+  transform: translateX(0);
 }
 
 .leftEmersion-exit-active {
-  transform: translateX(-270px);
+  transform: translateX(rem(-270));
   transition: transform 500ms ease-in
 }
 
 //=====================================colors==============================================
 
 .rightEmersion-enter {
-  transform: translateX(270px);
+  transform: translateX(rem(270));
 }
 
 .rightEmersion-enter-active {
-  transform: translateX(0px);
+  transform: translateX(0);
   transition: transform 500ms ease-in
 }
 
 .rightEmersion-exit {
-  transform: translateX(0px);
+  transform: translateX(0);
   transition: transform 500ms ease-in
 }
 
 .rightEmersion-exit-active {
-  transform: translateX(270px);
+  transform: translateX(rem(270));
   transition: transform 500ms ease-in
 }
 
@@ -262,9 +262,9 @@
 
 #modal {
   overflow: hidden;
-  width: 300px;
+  width: rem(300);
   height: auto;
-  min-height: 300px;
+  min-height: rem(300);
   position: absolute;
   //background: white;
   //opacity: 0.8;
@@ -277,19 +277,19 @@
   }
 
   button {
-    width: 100px;
-    height: 30px;
+    width: rem(100);
+    height: rem(30);
     margin: 0 auto;
     cursor: pointer;
-    font-size: 9px;
+    font-size: rem(9);
     // padding: 1.25rem 2.5rem;
     display: block;
     background-color: #009ac9;
-    border: 1px solid transparent;
+    border: rem(1) solid transparent;
     color: #ffffff;
     font-weight: 300;
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
+    -webkit-border-radius: rem(0);
+    border-radius: rem(0);
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -306,7 +306,7 @@
   left: 0;
   right: 0;
   margin: auto;
-  bottom: 30px;
+  bottom: rem(30);
   background: white;
 
 }
@@ -330,19 +330,19 @@
 }
 
 .wrapperEvent {
-  min-height: 300px;
+  min-height: rem(300);
   height: 100%;
   display: flex;
   flex-direction: column;
   background: white;
   opacity: 0.8;
-  padding-bottom: 100px;
+  padding-bottom: rem(100);
 
 }
 
 .modalControlPanel {
   width: 90%;
-  height: 100px;
+  height: rem(100);
   margin: auto;
   position: absolute;
 
@@ -358,9 +358,9 @@
   }
 
   .elementForm {
-    border: #269fd8 solid 1px;
-    border-radius: 10px;
-    padding: 5px;
+    border: #269fd8 solid rem(1);
+    border-radius: rem(10);
+    padding: rem(5);
     //border: none;
     text-align: center;
     width: 80%;
@@ -382,11 +382,11 @@
   //}
   .colorSelection {
     label {
-      width: 30px;
-      height: 30px;
+      width: rem(30);
+      height: rem(30);
       border-radius: 50%;
       //border: #009AC9 1px solid;
-      margin: 5px;
+      margin: rem(5);
       display: block;
       cursor: pointer;
     }
@@ -394,16 +394,16 @@
     input[type="radio"] {
       display: none;
       &:checked + label {
-        box-shadow: 0 0 10px #009ac9;
+        box-shadow: 0 0 rem(10) #009ac9;
       }
     }
   }
 
   select {
-    border: 1px solid #269fd8;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 5px;
+    border: rem(1) solid #269fd8;
+    border-radius: rem(10);
+    margin: rem(5);
+    padding: rem(5);
     cursor: pointer;
   }
 

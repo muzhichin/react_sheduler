@@ -13,7 +13,7 @@ export default class Type extends React.Component {
 
     onTestChange = (event) => {
         let value = this.refs._title.value,
-            state = store.getState().modalState.checkMark
+            state = store.getState().panelState.checkMark
         helperComponent(value, state, event)
     }
 

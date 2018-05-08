@@ -12,7 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
         devtool: 'inline-source-map',
         devServer: {
             contentBase: './' + PATHS.dist,
-            // compress: true,
+            compress: true,
             port: 3000,
             // inline:true
         },

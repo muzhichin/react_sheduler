@@ -1,7 +1,7 @@
 import {store} from "../../store";
 import React from "react";
-import {limitEndingDate} from "../../logic/factory";
-import {_modalState, _tempTask} from "../../store/actions";
+import {validationEndingDate} from "../../logic/factory";
+import {_panelButton, _tempTask} from "../../store/actions";
 import {orderFormElements} from "../constants"
 
 export default class EndEvent extends React.Component {
@@ -19,7 +19,7 @@ export default class EndEvent extends React.Component {
     }
 
     componentDidMount() {
-        store.dispatch(_modalState(true))
+        store.dispatch(_panelButton(true))
 
     }
 
@@ -78,15 +78,15 @@ export default class EndEvent extends React.Component {
 
         return <div id={"controlElement"} data-value={beginningDate} className={"endEvent elementAbsolute"}>
             <select ref="_year" name="year" onChange={this.handleChange}>
-                {limitEndingDate(beginningDate, selectedDate, "year").map((i, key) => <option
+                {validationEndingDate(beginningDate, selectedDate, "year").map((i, key) => <option
                     key={`year${key}`}>{i}</option>)}
             </select>
             <select ref="_month" name="month" onChange={this.handleChange}>
-                {limitEndingDate(beginningDate, selectedDate, "month").map((i, key) => <option
+                {validationEndingDate(beginningDate, selectedDate, "month").map((i, key) => <option
                     key={`month${key}`}>{i}</option>)}
             </select>
             <select ref="_day" name="day" onChange={this.handleChange}>
-                {limitEndingDate(beginningDate, selectedDate, "day").map((i, key) => <option
+                {validationEndingDate(beginningDate, selectedDate, "day").map((i, key) => <option
                     key={`day${key}`}>{i}</option>)}
             </select>
         </div>

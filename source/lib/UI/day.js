@@ -18,20 +18,17 @@ export default class Day extends React.Component {
         dataOpenModal === data ? store.dispatch(_modalHidden(event)) : false //todo
     }
 
-    componentWillReceiveProps(nextProps) {
-
-    }
-
 
     openModal() {
-        let {event, data, idEvent} = this.props
-        let {hidden} = store.getState().modalHidden
-        hidden ? store.dispatch(_modalHidden(false)) : store.dispatch(_modalHidden(true, event, data, {id: idEvent}))
+        let {hidden} = store.getState().modalHidden,
+            {list} = this.props
+        hidden ? store.dispatch(_modalHidden(false)) : store.dispatch(_modalHidden(true, list))
     }
 
     render() {
         let {activeDay} = this
-        let {color, data, day_number} = this.props
+        let {color, data} = this.props.list
+        let {day_number} = this.props
         let label = createLabelEvent(color)
         return <div
             className={activeDay ? (activeDay === data ? 'day active' : 'day') : 'day'}
