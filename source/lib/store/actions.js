@@ -3,7 +3,9 @@ import {v4} from 'uuid'
 import {orderFormElements} from "../UI/constants"
 
 export const _tasks = (obj) => {
+    console.log(obj)
     let {EVENT_START, EVENT_NAME, EVENT_DESCRIPTION, EVENT_COLOR, EVENT_TYPE, EVENT_END} = obj
+    let eventID = obj.eventID || null
     return ({
         type: C.SET_TASK,
         value: {
@@ -14,7 +16,7 @@ export const _tasks = (obj) => {
             type: EVENT_TYPE,
             details: EVENT_DESCRIPTION,
             name: EVENT_NAME,
-            id: v4(),
+            id: eventID ? eventID : v4(),
             color: EVENT_COLOR
         }
     })
@@ -45,7 +47,7 @@ export const _tempTask = (...arr) => dispatch => {
         orderFormElements.includes(str) ? dispatch({
             type: C.TEMP_TASK,
             value: i
-        }) : console.log("no str")
+        }) : console.log("_tempTask - not arguments")
     })
 }
 
@@ -66,7 +68,7 @@ export const _panelButton = (...arr) => dispatch => {
                 })
                 break
             default :
-                return 0
+                return console.log("_panelButton - not arguments")
         }
     }
 }
@@ -75,6 +77,6 @@ export const _panelState = (state) => dispatch => {
     orderFormElements.includes(state) ? dispatch({
         type: C.PANEL_STATE,
         value: state
-    }) : console.log("state undefined")
+    }) : console.log("_panelState - not arguments")
 
 }

@@ -19,6 +19,6 @@ export default class Type extends React.Component {
 
 
     render() {
-        return <input id={"controlElement"} className={"elementAbsolute elementForm"} onKeyDown={this.onTestChange} ref={"_title"}/>
+        return <input placeholder="Type event" id={"controlElement"} className={"elementAbsolute elementForm"} onKeyDown={this.onTestChange} ref={"_title"}/>
     }
 }

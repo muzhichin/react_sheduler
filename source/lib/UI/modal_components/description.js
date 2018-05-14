@@ -22,7 +22,7 @@ export default class Description extends React.Component {
         return (
             <textarea id={"controlElement"} key={"textarea"} ref="_title" onKeyDown={this.onTestChange} rows="3"
                       autoComplete="off"
-                      placeholder="Enter description" className={"elementAbsolute elementForm"} name="descriptionEvents"></textarea>
+                      placeholder="Description event" className={"elementAbsolute elementForm"} name="descriptionEvents"></textarea>
         )
     }
 }

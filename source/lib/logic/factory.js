@@ -5,6 +5,7 @@ import {_panelState, _panelButton, _tempTask} from "../store/actions";
 import {orderFormElements} from "../UI/constants"
 
 
+
 export const dataControl = () => {
     let controlElement = document.getElementById("controlElement"),
         state = store.getState().panelState.state

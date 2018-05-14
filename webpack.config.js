@@ -21,7 +21,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
             path: PATHS.dist,
             filename: '[name].js',
             // publicPath: /${PATHS.dist}/
-            publicPath: '/'
+            publicPath: ''
         },
         module: {
             rules: [
@@ -69,28 +69,29 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
             ]
         },
 
-        // optimization: {
-        //     splitChunks: {
-        //         chunks: "async",
-        //         minSize: 30000,
-        //         minChunks: 1,
-        //         maxAsyncRequests: 5,
-        //         maxInitialRequests: 3,
-        //         automaticNameDelimiter: '~',
-        //         name: true,
-        //         cacheGroups: {
-        //             vendors: {
-        //                 test: /[\\/]node_modules[\\/]/,
-        //                 priority: -10
-        //             },
-        //             default: {
-        //                 minChunks: 2,
-        //                 priority: -20,
-        //                 reuseExistingChunk: true
-        //             }
-        //         }
-        //     }
-        // },
+        optimization: {
+            // minimizer: [true]
+            //     splitChunks: {
+            //         chunks: "async",
+            //         minSize: 30000,
+            //         minChunks: 1,
+            //         maxAsyncRequests: 5,
+            //         maxInitialRequests: 3,
+            //         automaticNameDelimiter: '~',
+            //         name: true,
+            //         cacheGroups: {
+            //             vendors: {
+            //                 test: /[\\/]node_modules[\\/]/,
+            //                 priority: -10
+            //             },
+            //             default: {
+            //                 minChunks: 2,
+            //                 priority: -20,
+            //                 reuseExistingChunk: true
+            //             }
+            //         }
+            //     }
+        },
 
         plugins: [
             new ExtractTextPlugin({filename: 'app.bundle.css'}),

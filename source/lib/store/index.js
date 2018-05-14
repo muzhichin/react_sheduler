@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {modalHidden, panelState, tasks, tempTask, nameStore} from './reducers'
-import stateData from '../../data/initialState'
-import stateDataEvent from '../../data/initialStateEvent'
+import {modalHidden, panelState, tasks, tempTask} from './reducers'
+import stateData from '../../data/initial_state'
+import baseEvents from '../../data/base_events'
 import thunk from 'redux-thunk'
 
 const logger = store => next => action => {
@@ -17,14 +17,14 @@ const logger = store => next => action => {
 
 const saver = store => next => action => {
     let result = next(action)
-    let {nameStore} = store.getState()
-    localStorage[nameStore] = JSON.stringify(store.getState())
+    let {storagName} = store.getState()
+    localStorage[storagName] = JSON.stringify(store.getState())
     return result
 }
 
 const storeFactory = (initialState = stateData, name = 'redux-store') =>
     applyMiddleware(thunk, logger, saver)(createStore)(
-        combineReducers({tasks, nameStore, modalHidden, panelState, tempTask}),
+        combineReducers({tasks, modalHidden, storagName: (state = {}) => state, panelState, tempTask}),
         (localStorage[name]) ?
             JSON.parse(localStorage[name]) :
             initialState
@@ -32,4 +32,4 @@ const storeFactory = (initialState = stateData, name = 'redux-store') =>
 
 
 export const store = storeFactory()
-export const storeEvent = storeFactory(stateDataEvent, 'redux-event-store')
+export const storeEvent = storeFactory(baseEvents, baseEvents.storagName)
