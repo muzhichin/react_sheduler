@@ -8,7 +8,9 @@ const constants = {
     PANEL_STATE: "PANEL_STATE",
     PANEL_BUTTON: "PANEL_BUTTON",
     TEMP_TASK: "TEMP_TASK",
-    SET_TASK: "SET_TASK"
+    SET_TASK: "SET_TASK",
+    REMOVE_TASK: "REMOVE_TASK",
+    GOOGLE_AUTH: "GOOGLE_AUTH"
 }
 
 export default constants

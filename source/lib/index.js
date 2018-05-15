@@ -6,9 +6,7 @@ import Calendar from './UI/calendar'
 import sass from "../styles/style.scss";
 import css from "../styles/taskman.css";
 
-localStorage.clear()
-
-
+// localStorage.clear()
 // ReactDOM.render(
 //     <Provider store={store} storeEvent={storeEvent}>
 //         <Calendar/>

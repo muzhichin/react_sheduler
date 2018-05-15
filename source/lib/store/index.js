@@ -1,7 +1,8 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {modalHidden, panelState, tasks, tempTask} from './reducers'
+import {modalHidden, panelState, tasks, tempTask, googleAuth} from './reducers'
 import stateData from '../../data/initial_state'
 import baseEvents from '../../data/base_events'
+import baseGoogle from '../../data/base_google'
 import thunk from 'redux-thunk'
 
 const logger = store => next => action => {
@@ -24,7 +25,14 @@ const saver = store => next => action => {
 
 const storeFactory = (initialState = stateData, name = 'redux-store') =>
     applyMiddleware(thunk, logger, saver)(createStore)(
-        combineReducers({tasks, modalHidden, storagName: (state = {}) => state, panelState, tempTask}),
+        combineReducers({
+            tasks,
+            modalHidden,
+            googleAuth,
+            storagName: (state = {}) => state,
+            panelState,
+            tempTask
+        }),
         (localStorage[name]) ?
             JSON.parse(localStorage[name]) :
             initialState
@@ -33,3 +41,4 @@ const storeFactory = (initialState = stateData, name = 'redux-store') =>
 
 export const store = storeFactory()
 export const storeEvent = storeFactory(baseEvents, baseEvents.storagName)
+export const storeGoogle = storeFactory(baseGoogle, baseGoogle.storagName)

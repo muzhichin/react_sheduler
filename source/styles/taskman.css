@@ -7,10 +7,10 @@
 
 
 .svg {
-    width:800px;
+    width:700px;
     height:400px;
-    overflow: visible;
     position:absolute;
+    overflow: hidden;
 }
 
 .grid .tick {

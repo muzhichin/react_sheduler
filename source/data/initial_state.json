@@ -9,5 +9,6 @@
   },
   "panelState": {
     "checkMark": false
-  }
+  },
+  "googleAuth" : false
 }

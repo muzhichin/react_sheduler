@@ -1,21 +1,20 @@
 import {_tasks} from './store/actions'
 import moment from "moment/moment";
-import {storeEvent} from "./store/index";
+import {storeGoogle, store} from "./store/index";
 
 // Client ID and API key from the Developer Console
-var CLIENT_ID = '365383693887-vdo07nrbep44ctcpg2hgrn6dbqnnqbcs.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyAef4uippRgAFbtPz4cfSBKupCt9gZ7KHM';
+const CLIENT_ID = '365383693887-vdo07nrbep44ctcpg2hgrn6dbqnnqbcs.apps.googleusercontent.com';
+const API_KEY = 'AIzaSyAef4uippRgAFbtPz4cfSBKupCt9gZ7KHM';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-var authorizeButton = document.getElementById('authorize-button');
-var signoutButton = document.getElementById('signout-button');
-console.log('hello')
+const authorizeButton = document.getElementById('authorize-button');
+const signoutButton = document.getElementById('signout-button');
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -53,10 +52,16 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
-        listUpcomingEvents();
+        if (store.getState().googleAuth) {
+            console.log(store.getState().googleAuth)
+        } else {
+            listUpcomingEvents()
+        }
     } else {
         authorizeButton.style.display = 'block';
         signoutButton.style.display = 'none';
+        store.dispatch({type: "GOOGLE_AUTH", value: false})
+        storeGoogle.dispatch({type: "REMOVE_TASK"})
     }
 }
 
@@ -100,11 +105,10 @@ function listUpcomingEvents() {
         'maxResults': 10,
         'orderBy': 'startTime'
     }).then(function (response) {
-        var events = response.result.items;
-        // appendPre('Upcoming events:');
+        let events = response.result.items;
 
         if (events.length > 0) {
-            for (var i = 0; i < events.length; i++) {
+            for (let i = 0; i < events.length; i++) {
                 let obj = {
                     EVENT_START: moment(events[i].start.dateTime).format('YYYY-MM-DD'),
                     EVENT_NAME: events[i].summary,
@@ -114,11 +118,12 @@ function listUpcomingEvents() {
                     EVENT_END: moment(events[i].end.dateTime).format('YYYY-MM-DD'),
                     eventID: events[i].id
                 }
-                storeEvent.dispatch(_tasks(obj))
-                console.log(obj)
+                storeGoogle.dispatch(_tasks(obj))
             }
+            store.dispatch({type: "GOOGLE_AUTH", value: true})
+            console.log(store.getState().googleAuth)
         } else {
-            // appendPre('No upcoming events found.');
+            alert('No upcoming events found.');
         }
     });
 }

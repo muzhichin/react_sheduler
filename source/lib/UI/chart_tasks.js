@@ -14,7 +14,7 @@ import {
 } from "d3";
 
 import {dayTaskmanSort, substrateData, oneDayMore} from "../logic/factory";
-import {storeEvent} from "../store";
+import {storeEvent, storeGoogle} from "../store";
 
 
 export default class ChartTasks extends React.Component {
@@ -27,10 +27,14 @@ export default class ChartTasks extends React.Component {
         this.unsubscribe = storeEvent.subscribe(
             () => this.forceUpdate()
         )
+        this.unsubscribeGoogle = storeGoogle.subscribe(
+            () => this.forceUpdate()
+        )
     }
 
     componentWillUnmount() {
         this.unsubscribe()
+        this.unsubscribeGoogle()
     }
 
     componentDidMount() {

@@ -1,9 +1,8 @@
 import React from 'react';
 import moment from "moment/moment";
-import {store, storeEvent} from "../store/index";
+import {store, storeEvent, storeGoogle} from "../store/index";
 import {_panelState, _panelButton, _tempTask} from "../store/actions";
 import {orderFormElements} from "../UI/constants"
-
 
 
 export const dataControl = () => {
@@ -118,8 +117,10 @@ export function oneDayMore(data) {
 }
 
 export const dayTaskmanSort = (monthCounter) => {
+    let base = storeGoogle.getState().tasks.length > 0 ? [...storeEvent.getState().tasks, ...storeGoogle.getState().tasks] : storeEvent.getState().tasks
+    console.log(base)
     let listDay = recursion(timeCalculation(monthCounter).lastDay, [], (_id) => timeCalculation(monthCounter).set(_id)),
-        idEvent = storeEvent.getState().tasks.map((arr) => {
+        idEvent = base.map((arr) => {
             let result = listDay.filter(e =>
                 moment(e).isBetween(arr.data.start, arr.data.end, null, '[]')
             )
@@ -135,10 +136,10 @@ export const dayTaskmanSort = (monthCounter) => {
 }
 
 export const dayComponentSort = (monthCounter) => {
-    let listDay = recursion(timeCalculation(monthCounter).lastDay, [], (_id) => timeCalculation(monthCounter).set(_id))
-
+    let listDay = recursion(timeCalculation(monthCounter).lastDay, [], (_id) => timeCalculation(monthCounter).set(_id)),
+        base = storeGoogle.getState().tasks.length > 0 ? [...storeEvent.getState().tasks, ...storeGoogle.getState().tasks] : storeEvent.getState().tasks
     return listDay.map(item => {
-        let temp = storeEvent.getState().tasks.filter(obj => moment(item).isBetween(obj.data.start, obj.data.end, null, '[]'))
+        let temp = base.filter(obj => moment(item).isBetween(obj.data.start, obj.data.end, null, '[]'))
         if (temp.length > 0) {
             let obj = temp.reduce((acc, cur, i) => {
                 acc.name[i] = [cur.name]

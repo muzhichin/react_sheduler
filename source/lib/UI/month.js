@@ -1,4 +1,4 @@
-import {storeEvent} from "../store";
+import {storeEvent, storeGoogle} from "../store";
 import React from "react";
 import {dayComponentSort} from "../logic/factory";
 import Day from "./day";
@@ -13,10 +13,15 @@ export default class Month extends React.Component {
         this.unsubscribe = storeEvent.subscribe(
             () => this.forceUpdate()
         )
+
+        this.unsubscribeGoogle = storeGoogle.subscribe(
+            () => this.forceUpdate()
+        )
     }
 
     componentWillUnmount() {
         this.unsubscribe()
+        this.unsubscribeGoogle()
     }
 
 

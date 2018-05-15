@@ -5,13 +5,17 @@ export const tasks = (state = {}, action) => {
         case C.SET_TASK :
             let {value} = action
             return [...state, value]
+        case C.REMOVE_TASK :
+            return false
         default:
             return state
     }
 }
 
-export const nameStore = (state = {}, action) => {
+export const googleAuth = (state = {}, action) => {
     switch (action.type) {
+        case C.GOOGLE_AUTH :
+            return action.value
         default:
             return state
     }
