@@ -12,29 +12,41 @@ export default class Day extends React.Component {
         this.openModal = this.openModal.bind(this)
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        let {events, data} = this.props
+        if (data === nextProps.data) {
+            if (events && nextProps.events) {
+                return events.length !== nextProps.events.length ? true : false
+            } else if (events === null && nextProps === null) {
+                return false
+            } else {
+                return false
+            }
+        } else return true
+    }
+
     componentDidUpdate() {
-        let {event, data} = this.props
-        let dataOpenModal = store.getState().modalHidden.data
+        let {event, data} = this.props,
+            dataOpenModal = store.getState().modalHidden.data
         dataOpenModal === data ? store.dispatch(_modalHidden(event)) : false //todo
     }
 
 
     openModal() {
-        let {hidden} = store.getState().modalHidden,
-            {list} = this.props
-        hidden ? store.dispatch(_modalHidden(false)) : store.dispatch(_modalHidden(true, list))
+        let {hidden} = store.getState().modalHidden
+        hidden ? store.dispatch(_modalHidden(false)) : store.dispatch(_modalHidden(true, this.props))
     }
 
     render() {
-        let {activeDay} = this
-        let {color, data} = this.props.list
-        let {day_number} = this.props
-        let label = createLabelEvent(color)
+        let {activeDay} = this,
+            {dayNumber, events, data} = this.props,
+            colors = events ? events.map((item) => item.color) : null,
+            label = createLabelEvent(colors)
         return <div
             className={activeDay ? (activeDay === data ? 'day active' : 'day') : 'day'}
             onClick={this.openModal}>
             {label}
-            <p>{day_number + 1}</p>
+            <p>{dayNumber + 1}</p>
         </div>
     }
 }

@@ -114,7 +114,7 @@ function listUpcomingEvents() {
                     EVENT_NAME: events[i].summary,
                     EVENT_DESCRIPTION: "Null",
                     EVENT_COLOR: '#4cd600',
-                    EVENT_TYPE: events[i].creator.email,
+                    EVENT_TYPE: 'Google event',
                     EVENT_END: moment(events[i].end.dateTime).format('YYYY-MM-DD'),
                     eventID: events[i].id
                 }

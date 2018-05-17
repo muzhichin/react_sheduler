@@ -2,6 +2,7 @@ import React from "react"
 import {store} from "../store/index"
 import {_panelButton, _panelState} from "../store/actions"
 import ModalControlPanel from "./modal_components/index"
+import EventItem from "./modal_components/event_item"
 import {nextState} from "../logic/factory"
 import {orderFormElements} from "./constants"
 import {dataControl} from "../logic/factory"
@@ -23,17 +24,15 @@ export default class Modal extends React.Component {
     }
 
     render() {
-        let {data, name, hidden, id} = store.getState().modalHidden,
+        let {events, hidden, data} = store.getState().modalHidden,
             {checkMark} = store.getState().panelState,
-            state = store.getState().panelState.state || orderFormElements[0]
+            state = store.getState().panelState.state || orderFormElements[0]  //todo nextState={nextState} передача в ModalControlPanel
         return (<div id={"modal"} className={hidden ? "open" : ""}>
             <div className={"wrapperEvent"}>
                 <p>{data}</p>
-                {name === null ?
-                    <div id={id} className="event"><p>Нет событий</p></div> : name.map((item, num) => <div id={id[num]}
-                        key={`event${num}`} className="event"><p>{item}</p>
-                    </div>)}
-                    {/*<EventList></EventList>*/}
+                {events === null ?
+                    <div id={'no-events'} className="event"><p>Нет событий</p></div> : events.map((cur, i) =>
+                        <EventItem {...cur} key={`event-${i}`}></EventItem>)}
             </div>
             <div className={"modalControlPanel"}>
                 <ModalControlPanel id={"idControl"} data={data} nextState={nextState} key={'modalControlPanel'}/>

@@ -13,7 +13,7 @@ class Calendar extends React.Component {
         this.state = {
             isToggleOn: 0,
             classAnimations: false
-        }
+    }
 
         this.handleClick = this.handleClick.bind(this)
         this.handleClickBack = this.handleClickBack.bind(this)

@@ -28,10 +28,11 @@ export default class Month extends React.Component {
     render() {
         let {monthCounter} = this.props,
             sortDayEvents = dayComponentSort(monthCounter)
-        return sortDayEvents.map((item, k) => <Day
+        return sortDayEvents.map((item, k) => {
+            return <Day
                 monthCounter={monthCounter}
                 key={`day-${k}`}
-                list={item} keyDay={`day-${k}`} day_number={k}/>
+                {...item} dayNumber={k}/>}
             //
             // monthCounter={monthCounter}
             // idEvent={item.id}

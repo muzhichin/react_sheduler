@@ -118,7 +118,6 @@ export function oneDayMore(data) {
 
 export const dayTaskmanSort = (monthCounter) => {
     let base = storeGoogle.getState().tasks.length > 0 ? [...storeEvent.getState().tasks, ...storeGoogle.getState().tasks] : storeEvent.getState().tasks
-    console.log(base)
     let listDay = recursion(timeCalculation(monthCounter).lastDay, [], (_id) => timeCalculation(monthCounter).set(_id)),
         idEvent = base.map((arr) => {
             let result = listDay.filter(e =>
@@ -140,17 +139,7 @@ export const dayComponentSort = (monthCounter) => {
         base = storeGoogle.getState().tasks.length > 0 ? [...storeEvent.getState().tasks, ...storeGoogle.getState().tasks] : storeEvent.getState().tasks
     return listDay.map(item => {
         let temp = base.filter(obj => moment(item).isBetween(obj.data.start, obj.data.end, null, '[]'))
-        if (temp.length > 0) {
-            let obj = temp.reduce((acc, cur, i) => {
-                acc.name[i] = [cur.name]
-                acc.id[i] = [cur.id]
-                acc.color[i] = [cur.color]
-                return acc
-            }, {name: [], color: [], id: []})
-            return {data: item, ...obj}
-        } else {
-            return {data: item, name: null, color: null}
-        }
+        return temp.length > 0 ? {data: item, events: temp} : {data: item, events: null}
     })
 }
 
