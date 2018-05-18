@@ -17,7 +17,8 @@ export default class Name extends React.Component {
 
 
     render() {
-        return <input placeholder="Name event" id={"controlElement"} className={"elementAbsolute elementForm"} onKeyDown={this.onTestChange}
+        let func = this.props.excerpt ? null : this.onTestChange
+        return <input placeholder="Name event" id={"controlElement"} className={"elementAbsolute elementForm"} onKeyDown={func}
                       ref={"_title"}/>
     }
 }

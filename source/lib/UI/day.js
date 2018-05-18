@@ -13,22 +13,29 @@ export default class Day extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let {events, data} = this.props
-        if (data === nextProps.data) {
-            if (events && nextProps.events) {
-                return events.length !== nextProps.events.length ? true : false
-            } else if (events === null && nextProps === null) {
+        let {events, data} = this.props,
+            excerpt = data === nextProps.data
+        if (excerpt) {
+            if (nextProps.events && events) {
+                return events.length !== nextProps.events.length
+            } else if (nextProps.events === null && events === null) {
                 return false
-            } else {
-                return false
+            } else if (nextProps.events === null && events !== null) {
+                return true
+            } else if (events === null && nextProps.events !== null) {
+                return true
             }
-        } else return true
+
+        } else {
+            return true
+        }
+
     }
 
     componentDidUpdate() {
-        let {event, data} = this.props,
+        let {data} = this.props,
             dataOpenModal = store.getState().modalHidden.data
-        dataOpenModal === data ? store.dispatch(_modalHidden(event)) : false //todo
+        dataOpenModal === data ? store.dispatch(_modalHidden(this.props)) : false //todo
     }
 
 

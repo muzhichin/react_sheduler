@@ -1,4 +1,4 @@
-import {storeEvent, storeGoogle} from "../store";
+import {storeEvent, storeGoogle} from "../store/index";
 import React from "react";
 import {dayComponentSort} from "../logic/factory";
 import Day from "./day";

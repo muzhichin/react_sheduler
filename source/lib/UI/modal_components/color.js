@@ -20,7 +20,7 @@ export default class Color extends React.Component {
     }
 
     componentDidMount() {
-        store.dispatch(_panelButton(true))
+       this.props.excerpt ? 0 : store.dispatch(_panelButton(true))
     }
 
 

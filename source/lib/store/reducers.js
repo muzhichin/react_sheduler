@@ -6,7 +6,7 @@ export const tasks = (state = {}, action) => {
             let {value} = action
             return [...state, value]
         case C.REMOVE_TASK :
-            return false
+            return action.value ? state.filter(arr => arr.id !== action.value) : false
         default:
             return state
     }

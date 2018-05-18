@@ -19,10 +19,12 @@ export default class Description extends React.Component {
     }
 
     render() {
+        let func = this.props.excerpt ? null : this.onTestChange
         return (
-            <textarea id={"controlElement"} key={"textarea"} ref="_title" onKeyDown={this.onTestChange} rows="3"
+            <textarea id={"controlElement"} key={"textarea"} ref="_title" onKeyDown={func} rows="3"
                       autoComplete="off"
-                      placeholder="Description event" className={"elementAbsolute elementForm"} name="descriptionEvents"></textarea>
+                      placeholder="Description event" className={"elementAbsolute elementForm"}
+                      name="descriptionEvents"></textarea>
         )
     }
 }
