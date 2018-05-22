@@ -37,7 +37,7 @@ export default class Modal extends React.Component {
     handleClickOutside(event) {
         if (event.target.parentNode.className === "day") {
             return
-        } else if (event.target.dataset.name === "rect-chart-event") {
+        } else if (event.target.getAttribute("data-name") === "rect-chart-event") {
             return
         }
         if (this.wrapperRef && !this.wrapperRef.contains(event.target) && store.getState().modalHidden.hidden) {

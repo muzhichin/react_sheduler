@@ -1,6 +1,7 @@
-@import "modern-normalize.css";
+//@import "modern-normalize.css";
 @import "developer-settings";
 @import "variable";
+@import "reset.css";
 @import "project-settings";
 
 #authorize-button {
@@ -30,15 +31,16 @@
 }
 
 #calendar {
-  font-family: 'Raleway', sans-serif;
-  width: rem(700);
+  font-family: inherit;
+  //width: rem(700);
+  width: 700px;
   height: auto;
   background: #269fd8;
   display: flex;
   flex-wrap: wrap;
   align-content: start;
   position: relative;
-  padding: rem(10);
+  //padding: rem(10);
   .caledarHeader span {
     width: rem(40);
     height: rem(16);
@@ -313,7 +315,6 @@
   bottom: rem(30);
   background: white;
 
-
 }
 
 .button-previos {
@@ -529,4 +530,37 @@
     width: 100%;
 
   }
+}
+
+.grid .tick {
+  opacity: 0.5;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+#tag {
+  color: white;
+  background: #FA283D;
+  width: 150px;
+  position: absolute;
+  display: none;
+  padding: 3px 6px;
+  margin-left: -80px;
+  font-size: 11px;
+}
+
+#tag:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  width: 0;
+  border-width: 10px;
+  border-bottom-color: #FA283D;
+  top: -20px;
 }
