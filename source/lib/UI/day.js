@@ -25,23 +25,19 @@ export default class Day extends React.Component {
             } else if (events === null && nextProps.events !== null) {
                 return true
             }
-
         } else {
             return true
         }
-
     }
 
     componentDidUpdate() {
         let {data} = this.props,
-            dataOpenModal = store.getState().modalHidden.data
-        dataOpenModal === data ? store.dispatch(_modalHidden(this.props)) : false //todo
+            dataModal = store.getState().modalHidden.data
+        dataModal === data ? store.dispatch(_modalHidden(this.props)) : false //todo
     }
 
-
     openModal() {
-        let {hidden} = store.getState().modalHidden
-        hidden ? store.dispatch(_modalHidden(false)) : store.dispatch(_modalHidden(true, this.props))
+        store.dispatch(_modalHidden(true, this.props))
     }
 
     render() {
@@ -50,10 +46,9 @@ export default class Day extends React.Component {
             colors = events ? events.map((item) => item.color) : null,
             label = createLabelEvent(colors)
         return <div
-            className={activeDay ? (activeDay === data ? 'day active' : 'day') : 'day'}
-            onClick={this.openModal}>
+            className={activeDay ? (activeDay === data ? 'day active' : 'day') : 'day'}>
             {label}
-            <p>{dayNumber + 1}</p>
+            <p onClick={this.openModal}>{dayNumber + 1}</p>
         </div>
     }
 }

@@ -15,6 +15,7 @@ const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
 const authorizeButton = document.getElementById('authorize-button');
 const signoutButton = document.getElementById('signout-button');
+const authorizeText = document.getElementById('authorize-text');
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -52,6 +53,7 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
+        authorizeText.style.display = 'none';
         if (store.getState().googleAuth) {
             console.log(store.getState().googleAuth)
         } else {
@@ -60,6 +62,7 @@ function updateSigninStatus(isSignedIn) {
     } else {
         authorizeButton.style.display = 'block';
         signoutButton.style.display = 'none';
+        authorizeText.style.display = 'block';
         store.dispatch({type: "GOOGLE_AUTH", value: false})
         storeGoogle.dispatch({type: "REMOVE_TASK"})
     }

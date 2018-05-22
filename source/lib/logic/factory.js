@@ -85,14 +85,12 @@ export const helperComponent = (str, state, event) => { // функция пом
     }
 }
 
-
 export const nextState = () => {             //todo переписать
     let indexLength = orderFormElements.length - 1,
         state = store.getState().panelState.state || orderFormElements[0],
         i = orderFormElements.indexOf(state) + 1 > indexLength ? 0 : orderFormElements.indexOf(state) + 1
     return orderFormElements[i]
 }
-
 
 export function timeCalculation(monthCounter = 0) {
 
@@ -126,7 +124,7 @@ export const dayTaskmanSort = (monthCounter) => {
             let [first] = result
             let [last] = result.reverse()
             let obj = {
-                data: {start: first, end: last}
+                dataOnlyMount: {start: first, end: last}
             }
 
             return (first !== undefined) ? {...arr, ...obj} : false

@@ -2,13 +2,12 @@
   "storagName": "redux-store",
   "tasks": [],
   "modalHidden": {
-    "name": null,
-    "id" : null,
-    "hidden" : false,
-    "data": null
+    "events": null,
+    "data": null,
+    "hidden": false
   },
   "panelState": {
     "checkMark": false
   },
-  "googleAuth" : false
+  "googleAuth": false
 }

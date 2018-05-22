@@ -78,5 +78,4 @@ export const _panelState = (state) => dispatch => {
         type: C.PANEL_STATE,
         value: state
     }) : console.log("_panelState - not arguments")
-
 }

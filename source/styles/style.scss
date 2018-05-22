@@ -285,7 +285,7 @@
     height: rem(30);
     margin: 0 auto;
     cursor: pointer;
-    font-size: rem(9);
+    font-size: rem(12);
     // padding: 1.25rem 2.5rem;
     display: block;
     background-color: #009ac9;
@@ -313,6 +313,7 @@
   bottom: rem(30);
   background: white;
 
+
 }
 
 .button-previos {
@@ -321,6 +322,55 @@
 }
 
 .button-next {
+
+}
+
+.google-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: rem(100);
+  p {
+    font-size: rem(10);
+  }
+  button {
+    width: 6.25rem;
+    height: 1.875rem;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 0.9625rem;
+    display: block;
+    background-color: #009ac9;
+    border: 0.0625rem solid transparent;
+    color: #ffffff;
+    font-weight: 300;
+    padding-right: 0.9625rem;
+    -webkit-border-radius: 0rem;
+    border-radius: 0rem;
+    position: relative;
+    line-height: 0;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0.9625rem;
+      height: 0.9625rem;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: url("../img/Google-Chrome-Browser-Logo.png");
+      margin: auto;
+      bottom: 0;
+      top: 0;
+      right: rem(4);
+    }
+  }
+}
+
+#signout-button {
+
+}
+
+#authorize-button {
 
 }
 
@@ -344,7 +394,8 @@
   .event {
     text-align: center;
     &-name {
-      display: inline;
+      display: inline-block;
+      margin: 10px;
       cursor: pointer;
     }
   }
@@ -429,10 +480,26 @@
   position: absolute;
 }
 
+.panelChangeEvent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.infoEvent {
+  text-align: left;
+  p {
+    padding-left: 24px;
+    span {
+      color: #009ac9;
+    }
+  }
+}
+
 .checked-info-event {
   display: block;
-  height: 40px;
-  width: 40px;
+  height: 20px;
+  width: 20px;
   margin: 10px;
   background-repeat: no-repeat;
   background-size: contain;
@@ -441,13 +508,13 @@
   cursor: pointer;
 
   &-close {
-    background-image: url("../img/checked.svg");
+    background-image: url("../img/close.svg");
   }
   &-edit {
     background-image: url("../img/checked.svg");
   }
   &-delet {
-    background-image: url("../img/checked.svg");
+    background-image: url("../img/trash.svg");
   }
 }
 

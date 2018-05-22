@@ -14,7 +14,8 @@ import {
 } from "d3";
 
 import {dayTaskmanSort, substrateData, oneDayMore} from "../logic/factory";
-import {storeEvent, storeGoogle} from "../store";
+import {storeEvent, storeGoogle, store} from "../store";
+import {_modalHidden} from "../store/actions";
 
 
 export default class ChartTasks extends React.Component {
@@ -55,7 +56,7 @@ export default class ChartTasks extends React.Component {
         let taskArray = dayTaskmanSort(this.props.monthCounter)
         if (taskArray.length === 0) {
             taskArray = [{
-                data: {
+                dataOnlyMount: {
                     "start": `${substrateData(this.props.monthCounter).dataStartOf}`,
                     "end": `${substrateData(this.props.monthCounter).dataEndOf}`
                 },
@@ -79,10 +80,10 @@ export default class ChartTasks extends React.Component {
 
         let timeScale = scaleTime()
             .domain([min(taskArray, function (d) {
-                return dateFormat(d.data.start);
+                return dateFormat(d.dataOnlyMount.start);
             }),
                 max(taskArray, function (d) {
-                    return dateFormat(d.data.end);
+                    return dateFormat(oneDayMore(d.dataOnlyMount.end));
                 })])
             .range([0, w - 150])
             .nice();
@@ -161,13 +162,13 @@ export default class ChartTasks extends React.Component {
                 .attr("ry", 3)
                 .attr("class", "rectBlock")
                 .attr("x", function (d) {
-                    return timeScale(dateFormat(d.data.start)) + theSidePad;
+                    return timeScale(dateFormat(d.dataOnlyMount.start)) + theSidePad;
                 })
                 .attr("y", function (d, i) {
                     return i * theGap + theTopPad;
                 })
                 .attr("width", function (d) {
-                    return (timeScale(dateFormat(oneDayMore(d.data.end))) - timeScale(dateFormat(d.data.start)));
+                    return (timeScale(dateFormat(oneDayMore(d.dataOnlyMount.end))) - timeScale(dateFormat(d.dataOnlyMount.start)));
                 })
                 .attr("height", theBarHeight)
                 .attr("stroke", "none")
@@ -186,7 +187,7 @@ export default class ChartTasks extends React.Component {
                     return d.name;
                 })
                 .attr("x", function (d) {
-                    return (timeScale(dateFormat(d.data.end)) - timeScale(dateFormat(d.data.start))) / 2 + timeScale(dateFormat(d.data.start)) + theSidePad;
+                    return (timeScale(dateFormat(d.dataOnlyMount.end)) - timeScale(dateFormat(d.dataOnlyMount.start))) / 2 + timeScale(dateFormat(d.dataOnlyMount.start)) + theSidePad;
                 })
                 .attr("y", function (d, i) {
                     return i * theGap + 14 + theTopPad;
@@ -194,41 +195,30 @@ export default class ChartTasks extends React.Component {
                 .attr("font-size", 11)
                 .attr("text-anchor", "middle")
                 .attr("text-height", theBarHeight)
-                .attr("fill", "#000000");
+                .attr("fill", "#000000")
 
 
-            // rectText.on('mouseover', function (e) {
-            //     console.log(this.x.animVal.getItem(this));
-            //     let tag = "";
-            //
-            //     if (select(this).data()[0].details != undefined) {
-            //         tag = "Task: " + select(this).data()[0].name + "<br/>" +
-            //             "Type: " + select(this).data()[0].type + "<br/>" +
-            //             "Starts: " + select(this).data()[0].data.start + "<br/>" +
-            //             "Ends: " + select(this).data()[0].data.end + "<br/>" +
-            //             "Details: " + select(this).data()[0].details;
-            //     } else {
-            //         tag = "Task: " + select(this).data()[0].name + "<br/>" +
-            //             "Type: " + select(this).data()[0].type + "<br/>" +
-            //             "Starts: " + select(this).data()[0].data.start + "<br/>" +
-            //             "Ends: " + select(this).data()[0].data.end;
-            //     }
-            //     let output = document.getElementById("tag");
-            //
-            //     let x = this.x.animVal.getItem(this) + "px";
-            //     let y = this.y.animVal.getItem(this) + 25 + "px";
-            //
-            //     output.innerHTML = tag;
-            //     output.style.top = y;
-            //     output.style.left = x;
-            //     output.style.display = "block";
-            // }).on('mouseout', function () {
-            //     let output = document.getElementById("tag");
-            //     output.style.display = "none";
-            // });
+            let innerRectsOpacity = rectangles.append("rect")
+                .attr("rx", 3)
+                .attr("ry", 3)
+                .attr("class", "rectBlock")
+                .attr("x", function (d) {
+                    return timeScale(dateFormat(d.dataOnlyMount.start)) + theSidePad;
+                })
+                .attr("y", function (d, i) {
+                    return i * theGap + theTopPad;
+                })
+                .attr("width", function (d) {
+                    return (timeScale(dateFormat(oneDayMore(d.dataOnlyMount.end))) - timeScale(dateFormat(d.dataOnlyMount.start)));
+                })
+                .attr("height", theBarHeight)
+                .attr("stroke", "none")
+                .attr("opacity", 0)
+                .attr("class", "rect-chart-event")
+                .attr("data-name", "rect-chart-event")
 
 
-            innerRects.on('mouseover', function (e) {
+            innerRectsOpacity.on('mouseover', function (e) {
                 let tag = "";
                 if (select(this).data()[0].details != undefined) {
                     tag = "Task: " + select(this).data()[0].name + "<br/>" +
@@ -245,7 +235,7 @@ export default class ChartTasks extends React.Component {
                 let output = document.getElementById("tag");
 
                 let x = (this.x.animVal.value + this.width.animVal.value / 2) + "px";
-                let y = this.y.animVal.value + 25 + "px";
+                let y = this.y.animVal.value + 35 + "px";
 
                 output.innerHTML = tag;
                 output.style.top = y;
@@ -255,7 +245,12 @@ export default class ChartTasks extends React.Component {
                 let output = document.getElementById("tag");
                 output.style.display = "none";
 
-            });
+            })
+
+            innerRectsOpacity.on('click', function (e) {
+                let obj = {events: [select(this).data()[0]], data: select(this).data()[0].dataOnlyMount.start}
+                store.dispatch(_modalHidden(true, obj))
+            })
 
         }
 
