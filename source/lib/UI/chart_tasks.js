@@ -54,7 +54,6 @@ export default class ChartTasks extends React.Component {
     createBarChart() {
         const w = 700, h = 400;
         let taskArray = dayTaskmanSort(this.props.monthCounter)
-        console.log(taskArray)
         if (taskArray.length === 0) {
             taskArray = [{
                 dataOnlyMount: {
@@ -222,16 +221,16 @@ export default class ChartTasks extends React.Component {
             innerRectsOpacity.on('mouseover', function (e) {
                 let tag = "";
                 if (select(this).data()[0].details != undefined) {
-                    tag = "Task: " + select(this).data()[0].name + "<br/>" +
-                        "Type: " + select(this).data()[0].type + "<br/>" +
-                        "Starts: " + select(this).data()[0].data.start + "<br/>" +
-                        "Ends: " + select(this).data()[0].data.end + "<br/>" +
-                        "Details: " + select(this).data()[0].details;
+                    tag = "<span>Task:</span>" + select(this).data()[0].name + "<br/>" +
+                        "<span>Type:</span> " + select(this).data()[0].type + "<br/>" +
+                        "<span>Starts:</span> " + select(this).data()[0].data.start + "<br/>" +
+                        "<span>Ends:</span> " + select(this).data()[0].data.end + "<br/>" +
+                        "<span>Details:</span> " + select(this).data()[0].details;
                 } else {
-                    tag = "Task: " + select(this).data()[0].name + "<br/>" +
-                        "Type: " + select(this).data()[0].type + "<br/>" +
-                        "Starts: " + select(this).data()[0].data.start + "<br/>" +
-                        "Ends: " + select(this).data()[0].data.end;
+                    tag = "<span>Task:</span> " + select(this).data()[0].name + "<br/>" +
+                        "<span>Type:</span> " + select(this).data()[0].type + "<br/>" +
+                        "<span>Starts:</span> " + select(this).data()[0].data.start + "<br/>" +
+                        "<span>Ends:</span> " + select(this).data()[0].data.end;
                 }
                 let output = document.getElementById("tag");
 
