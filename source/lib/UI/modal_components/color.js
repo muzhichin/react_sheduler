@@ -9,23 +9,23 @@ export default class Color extends React.Component {
         super(props)
         this.setSelectedInputRef = this.setSelectedInputRef.bind(this)
         this.state = {
-            firstChecked : true
+            firstChecked: true
         }
     }
 
 
     setSelectedInputRef = element => {
-        element.target.id !== "color-1" ? this.setState(()=> ({firstChecked : false})) : this.setState(()=> ({firstChecked : true}))
+        element.target.id !== "color-1" ? this.setState(() => ({firstChecked: false})) : this.setState(() => ({firstChecked: true}))
         element.target.parentNode.dataset.value = element.target.value
     }
 
     componentDidMount() {
-       this.props.excerpt ? 0 : store.dispatch(_panelButton(true))
+        this.props.excerpt ? 0 : store.dispatch(_panelButton(true))
     }
 
 
     render() {
-        let checked =  this.state.firstChecked
+        let checked = this.state.firstChecked
         return (
             <div id={"controlElement"} data-value="#0BE0D9" className={"colorSelection elementAbsolute"}>
                 <input checked={checked} onChange={this.setSelectedInputRef} id={"color-1"} name="color" type="radio"
@@ -43,6 +43,10 @@ export default class Color extends React.Component {
                 <input onChange={this.setSelectedInputRef} id={"color-4"} name="color" type="radio"
                        value="#0B3BD6"/>
                 <label style={{backgroundColor: "#0B3BD6"}} htmlFor="color-4"></label>
+
+                <input onChange={this.setSelectedInputRef} id={"color-5"} name="color" type="radio"
+                       value="#e91e63"/>
+                <label style={{backgroundColor: "#e91e63"}} htmlFor="color-5"></label>
             </div>)
     }
 }
