@@ -129,7 +129,7 @@ export const dayTaskmanSort = (monthCounter) => {
 
             return (first !== undefined) ? {...arr, ...obj} : false
         })
-    return idEvent.filter(e => e !== false)
+    return idEvent.filter(e => e !== false).sort((a, b) => a.type < b.type ? -1 : a.type > b.type ? 1 : 0)
 }
 
 export const dayComponentSort = (monthCounter) => {

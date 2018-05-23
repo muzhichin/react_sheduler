@@ -49,7 +49,7 @@ export const tempTask = (state = {}, action) => {
     switch (action.type) {
         case C.TEMP_TASK :
             let {value} = action
-            console.log(value)
+            // console.log(value)
             return {...state, ...value}
         default:
             return state

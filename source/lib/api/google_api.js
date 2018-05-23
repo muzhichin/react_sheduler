@@ -440,7 +440,7 @@ gapi.load("", {
                 }
             },
             "h": "m;/_/scs/apps-static/_/js/k\u003doz.gapi.ru.LYrKPFA-YbQ.O/m\u003d__features__/am\u003dQQE/rt\u003dj/d\u003d1/rs\u003dAGLTcCPiH_dW25lS8VBcXxJ8IpesUl5wjQ",
-            "u": "https://apis.google.com/js/api.js",
+            "u": "https://apis.google.com/js/google_api.js",
             "hee": true,
             "fp": "cdd680364a929662b7ba6913482e2c18f9c5dda8",
             "dpo": false

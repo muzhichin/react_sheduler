@@ -1,28 +1,30 @@
-import {_tasks} from './store/actions'
-import moment from "moment/moment";
-import {storeGoogle, store} from "./store/index";
+import {_tasks} from '../store/actions'
+import moment from "moment/moment"
+import {storeGoogle, store} from "../store/index"
+require('../api/google_api.js')
+
 
 // Client ID and API key from the Developer Console
-const CLIENT_ID = '365383693887-vdo07nrbep44ctcpg2hgrn6dbqnnqbcs.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyAef4uippRgAFbtPz4cfSBKupCt9gZ7KHM';
+const CLIENT_ID = '365383693887-vdo07nrbep44ctcpg2hgrn6dbqnnqbcs.apps.googleusercontent.com'
+const API_KEY = 'AIzaSyAef4uippRgAFbtPz4cfSBKupCt9gZ7KHM'
 
 // Array of API discovery doc URLs for APIs used by the quickstart
-const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+const SCOPES = "https://www.googleapis.com/auth/calendar.readonly"
 
-const authorizeButton = document.getElementById('authorize-button');
-const signoutButton = document.getElementById('signout-button');
-const authorizeText = document.getElementById('authorize-text');
+const authorizeButton = document.getElementById('authorize-button')
+const signoutButton = document.getElementById('signout-button')
+const authorizeText = document.getElementById('authorize-text')
 
 /**
  *  On load, called to load the auth2 library and API client library.
  */
-export function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
-}
+// export function handleClientLoad() {
+//     gapi.load('client:auth2', initClient)
+// }
 
 /**
  *  Initializes the API client library and sets up sign-in state
@@ -36,13 +38,13 @@ function initClient() {
         scope: SCOPES
     }).then(function () {
         // Listen for sign-in state changes.
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus)
 
         // Handle the initial sign-in state.
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        authorizeButton.onclick = handleAuthClick;
-        signoutButton.onclick = handleSignoutClick;
-    });
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
+        authorizeButton.onclick = handleAuthClick
+        signoutButton.onclick = handleSignoutClick
+    })
 }
 
 /**
@@ -51,18 +53,18 @@ function initClient() {
  */
 function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        authorizeText.style.display = 'none';
+        authorizeButton.style.display = 'none'
+        signoutButton.style.display = 'block'
+        authorizeText.style.display = 'none'
         if (store.getState().googleAuth) {
-            console.log(store.getState().googleAuth)
+            // console.log(store.getState().googleAuth)
         } else {
             listUpcomingEvents()
         }
     } else {
-        authorizeButton.style.display = 'block';
-        signoutButton.style.display = 'none';
-        authorizeText.style.display = 'block';
+        authorizeButton.style.display = 'block'
+        signoutButton.style.display = 'none'
+        authorizeText.style.display = 'block'
         store.dispatch({type: "GOOGLE_AUTH", value: false})
         storeGoogle.dispatch({type: "REMOVE_TASK"})
     }
@@ -72,14 +74,14 @@ function updateSigninStatus(isSignedIn) {
  *  Sign in the user upon button click.
  */
 function handleAuthClick(event) {
-    gapi.auth2.getAuthInstance().signIn();
+    gapi.auth2.getAuthInstance().signIn()
 }
 
 /**
  *  Sign out the user upon button click.
  */
 function handleSignoutClick(event) {
-    gapi.auth2.getAuthInstance().signOut();
+    gapi.auth2.getAuthInstance().signOut()
 }
 
 /**
@@ -89,9 +91,9 @@ function handleSignoutClick(event) {
  * @param {string} message Text to be placed in pre element.
  */
 // function appendPre(message) {
-//     var pre = document.getElementById('content');
-//     var textContent = document.createTextNode(message + '\n');
-//     pre.appendChild(textContent);
+//     var pre = document.getElementById('content')
+//     var textContent = document.createTextNode(message + '\n')
+//     pre.appendChild(textContent)
 // }
 
 /**
@@ -108,7 +110,7 @@ function listUpcomingEvents() {
         'maxResults': 10,
         'orderBy': 'startTime'
     }).then(function (response) {
-        let events = response.result.items;
+        let events = response.result.items
 
         if (events.length > 0) {
             for (let i = 0; i < events.length; i++) {
@@ -124,9 +126,11 @@ function listUpcomingEvents() {
                 storeGoogle.dispatch(_tasks(obj))
             }
             store.dispatch({type: "GOOGLE_AUTH", value: true})
-            console.log(store.getState().googleAuth)
+            // console.log(store.getState().googleAuth)
         } else {
-            alert('No upcoming events found.');
+            alert('No upcoming events found.')
         }
-    });
+    })
 }
+
+gapi.load('client:auth2', initClient)

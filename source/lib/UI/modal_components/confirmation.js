@@ -12,7 +12,7 @@ export default class Confirmation extends React.Component {
     componentDidMount() {
         storeEvent.dispatch(_tasks(store.getState().tempTask))
         store.dispatch(_panelState(orderFormElements[0]))
-        console.log(storeEvent.getState())
+        // console.log(storeEvent.getState())
     }
 
     render() {

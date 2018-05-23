@@ -54,6 +54,7 @@ export default class ChartTasks extends React.Component {
     createBarChart() {
         const w = 700, h = 400;
         let taskArray = dayTaskmanSort(this.props.monthCounter)
+        console.log(taskArray)
         if (taskArray.length === 0) {
             taskArray = [{
                 dataOnlyMount: {
@@ -144,7 +145,7 @@ export default class ChartTasks extends React.Component {
                 .attr("fill", function (d) {
                     for (let i = 0; i < categories.length; i++) {
                         if (d.type == categories[i]) {
-                            return rgb(theColorScale(i));
+                            return rgb(theColorScale(i)).brighter(1);
                         }
                     }
                 })

@@ -40,6 +40,8 @@
   flex-wrap: wrap;
   align-content: start;
   position: relative;
+  @include pad(0, 0, 20, 0);
+  @include mar(10);
   //padding: rem(10);
   .caledarHeader span {
     width: rem(40);
@@ -63,6 +65,9 @@
     display: flex;
     flex-wrap: wrap;
     border-top: rem(1) solid #c6dcee;
+    .weekDay {
+      padding-top: rem(20);
+    }
     div {
       &:nth-child(13) p {
         color: #ff3b00cc
@@ -274,7 +279,7 @@
   position: absolute;
   //background: white;
   //opacity: 0.8;
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% + 10px));
   transition-duration: 1s;
   text-align: center;
   z-index: 100;
@@ -284,7 +289,7 @@
 
   button {
     width: rem(100);
-    height: rem(30);
+    height: rem(34);
     margin: 0 auto;
     cursor: pointer;
     font-size: rem(12);
@@ -322,8 +327,22 @@
 
 }
 
-.button-next {
+@keyframes google-anim {
+  0% {
+    background-color: #49b247;
+  }
 
+  33% {
+    background-color: #dc292f;
+  }
+
+  66% {
+    background-color: #fcd209;
+  }
+
+  100% {
+    background-color: #5996cb;
+  }
 }
 
 .google-button {
@@ -340,8 +359,9 @@
     margin: 0 auto;
     cursor: pointer;
     font-size: 0.9625rem;
+    animation: google-anim 3000ms ease-in-out infinite alternate;
     display: block;
-    background-color: #009ac9;
+    //background-color: #009ac9;
     border: 0.0625rem solid transparent;
     color: #ffffff;
     font-weight: 300;
@@ -378,6 +398,7 @@
 #chart {
   position: relative;
   z-index: 0;
+  width: rem(700);
 }
 
 #tag {
@@ -392,15 +413,23 @@
   background: white;
   opacity: 0.8;
   padding-bottom: rem(100);
+  &Data {
+    @include mar(10, 10, 10, 10);
+  }
+  @include pad(10);
   .event {
     text-align: center;
     &-name {
       display: inline-block;
-      margin: 10px;
+      @include mar(10, 10, 10, 10);
       cursor: pointer;
     }
   }
 
+}
+
+.rect-chart-event {
+  cursor: pointer;
 }
 
 .modalControlPanel {
@@ -543,7 +572,7 @@
 
 #tag {
   color: white;
-  background: #FA283D;
+  background: #009ac9;
   width: 150px;
   position: absolute;
   display: none;
@@ -561,6 +590,6 @@
   position: absolute;
   width: 0;
   border-width: 10px;
-  border-bottom-color: #FA283D;
+  border-bottom-color: #009ac9;
   top: -20px;
 }

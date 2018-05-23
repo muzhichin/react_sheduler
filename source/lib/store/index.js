@@ -24,7 +24,8 @@ const saver = store => next => action => {
 }
 
 const storeFactory = (initialState = stateData, name = 'redux-store') =>
-    applyMiddleware(thunk, logger, saver)(createStore)(
+    // applyMiddleware(thunk, logger, saver)(createStore)(
+    applyMiddleware(thunk, saver)(createStore)(
         combineReducers({
             tasks,
             modalHidden,

@@ -51,10 +51,10 @@ export default class Modal extends React.Component {
             state = store.getState().panelState.state || orderFormElements[0]  //todo nextState={nextState} передача в ModalControlPanel
         return (<div id={"modal"} ref={this.setWrapperRef} className={hidden ? "open" : ""}>
             <div className={"wrapperEvent"}>
-                <p>{data}</p>
+                <p className={"wrapperEventData"}>{data}</p>
                 {Array.isArray(events) ? events.map((cur, i) =>
                         <EventItem {...cur} key={`event-${i}`}></EventItem>) :
-                    <div id={'no-events'} className="event"><p>Нет событий</p></div>}
+                    <div className="event no-event"><p>Нет событий</p></div>}
             </div>
             <div className={"modalControlPanel"}>
                 <ModalControlPanel id={"idControl"} data={data} nextState={nextState} key={'modalControlPanel'}/>

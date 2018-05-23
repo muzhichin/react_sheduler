@@ -3,7 +3,7 @@ import {v4} from 'uuid'
 import {orderFormElements} from "../UI/constants"
 
 export const _tasks = (obj) => {
-    console.log(obj)
+    // console.log(obj)
     let {EVENT_START, EVENT_NAME, EVENT_DESCRIPTION, EVENT_COLOR, EVENT_TYPE, EVENT_END} = obj
     let eventID = obj.eventID || null
     return ({

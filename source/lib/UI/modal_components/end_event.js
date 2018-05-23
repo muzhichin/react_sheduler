@@ -77,6 +77,7 @@ export default class EndEvent extends React.Component {
             {selectedDate} = this.state
 
         return <div id={"controlElement"} data-value={beginningDate} className={"endEvent elementAbsolute"}>
+            <h3>Event end date</h3>
             <select ref="_year" name="year" onChange={this.handleChange}>
                 {validationEndingDate(beginningDate, selectedDate, "year").map((i, key) => <option
                     key={`year${key}`}>{i}</option>)}
